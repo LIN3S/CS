@@ -12,26 +12,25 @@
 namespace LIN3S\Php\Composer;
 
 use Composer\Script\Event;
+use Symfony\Component\Filesystem\Exception\IOException;
+use Symfony\Component\Filesystem\Filesystem;
 
 class Hooks
 {
-    public static function checkHooks(Event $event)
+    public static function addToProject(Event $event)
     {
         $io = $event->getIO();
-        $gitHook = @file_get_contents(__DIR__ . '/../../../.git/hooks/pre-commit');
-        $resourceHook = @file_get_contents(__DIR__ . '/../../../Resources/hooks/pre-commit');
-
-        $result = true;
-        if ($gitHook !== $resourceHook) {
-            $io->write(<<<EOT
-<error>You, motherfucker, please, set up your hooks!</error> you only have to type the following two commands:
-<info>rm -rf .git/hooks</info>
-<info>ln -s ../Resources/hooks .git/hooks</info>
-EOT
+        $fileSystem = new Filesystem();
+        
+        try {
+            $fileSystem->symlink(
+                __DIR__ . '/../../Resources/hooks/pre-commit',
+                __DIR__ . '/../../../../../../.git/hooks/pre-commit',
+                true
             );
-            $result = false;
+        } catch (IOException $exception) {
+            echo 'Something wrong happens during the symlink process: ';
+            $io->write(sprintf('<error>%s</error>', $exception->getMessage()));
         }
-
-        return $result;
     }
 }
