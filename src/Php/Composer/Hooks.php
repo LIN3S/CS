@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace LIN3S\Php\Composer;
+namespace LIN3S\CheckStyle\Php\Composer;
 
 use Composer\Script\Event;
 use Symfony\Component\Filesystem\Exception\IOException;
