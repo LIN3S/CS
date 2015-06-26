@@ -14,7 +14,7 @@
             "email": "bespina@lin3s.com"
         }
     ],
-    "require-dev": {
+    "require": {
         "symfony/filesystem":     "^2.7",
         "mmoreram/php-formatter": "^1.0"
     },
