@@ -11,7 +11,7 @@
 
 namespace LIN3S\CheckStyle\Checks;
 
-use CheckStyle;
+use LIN3S\CheckStyle\CheckStyle;
 use LIN3S\CheckStyle\Error\Error;
 use Symfony\Component\Process\ProcessBuilder;
 

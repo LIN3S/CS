@@ -1,4 +1,3 @@
-#!/usr/bin/php
 <?php
 
 /*
@@ -10,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-require __DIR__ . '/../../vendor/autoload.php';
+namespace LIN3S\CheckStyle;
 
 use LIN3S\CheckStyle\Checks\Composer;
 use LIN3S\CheckStyle\Checks\Git;

@@ -18,17 +18,16 @@ class Hooks
 {
     public static function addToProject()
     {
+        $hooksDirectory = __DIR__ . '/../../../../../.git/hooks';
         $fileSystem = new Filesystem();
 
         try {
-            $fileSystem->symlink(
-                __DIR__ . '/../CheckStyle.php',
-                __DIR__ . '/../../../../../.git/hooks/pre-commit',
-                true
-            );
+            if ($fileSystem->exists($hooksDirectory)) {
+                $fileSystem->remove($hooksDirectory);
+            }
+            $fileSystem->symlink(__DIR__ . '/../Hooks', $hooksDirectory, true);
         } catch (\Exception $exception) {
-            echo 'Something wrong happens during the symlink process: ';
-            echo sprintf('<error>%s</error>', $exception->getMessage());
+            echo sprintf("Something wrong happens during the symlink process: \n%s\n", $exception->getMessage());
         }
     }
 }
