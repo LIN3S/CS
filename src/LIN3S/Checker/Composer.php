@@ -9,13 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace LIN3S\CheckStyle\Checks;
+namespace LIN3S\CheckStyle\Checker;
 
 use LIN3S\CheckStyle\Exception\CheckFailException;
 
-class Composer
+final class Composer extends Checker
 {
-    public static function checkComposer($files)
+    /**
+     * {@inheritdoc}
+     */
+    public static function check(array $files, $directory = null)
     {
         $composerJsonDetected = false;
         $composerLockDetected = false;

@@ -15,10 +15,11 @@
         }
     ],
     "require": {
-        "symfony/filesystem":     "^2.7",
-        "mmoreram/php-formatter": "^1.0"
+        "mmoreram/php-formatter": "^1.0",
+        "phpmd/phpmd":            "^2.2",
+        "symfony/filesystem":     "^2.7"
     },
     "autoload": {
-        "psr-4": { "LIN3S\\CheckStyle\\": "src" }
+        "psr-4": { "LIN3S\\CheckStyle\\": "src/LIN3S" }
     }
 }

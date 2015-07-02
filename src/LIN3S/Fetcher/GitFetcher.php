@@ -9,11 +9,26 @@
  * file that was distributed with this source code.
  */
 
-namespace LIN3S\CheckStyle\Checks;
+namespace LIN3S\CheckStyle\Fetcher;
 
-class Git
+class GitFetcher
 {
-    public static function getCommittedFiles()
+    /**
+     * Static wrapper of getCommittedFiles method.
+     *
+     * @return array
+     */
+    public static function committedFiles()
+    {
+        return self::getCommittedFiles();
+    }
+
+    /**
+     * Gets all the files that are going to be committed.
+     *
+     * @return array
+     */
+    public function getCommittedFiles()
     {
         $output = [];
         $rc = 0;

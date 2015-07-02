@@ -14,8 +14,12 @@ namespace LIN3S\CheckStyle\Composer;
 use Composer\Script\Event;
 use Symfony\Component\Filesystem\Filesystem;
 
-class Hooks
+final class Hooks
 {
+    /**
+     * Static method that allows to create a hooks symlink
+     * when Composer throws the install or update commands.
+     */
     public static function addToProject()
     {
         $hooksDirectory = __DIR__ . '/../../../../../.git/hooks';

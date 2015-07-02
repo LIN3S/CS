@@ -9,15 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace LIN3S\CheckStyle\Checks;
+namespace LIN3S\CheckStyle\Checker;
 
 use LIN3S\CheckStyle\CheckStyle;
 use LIN3S\CheckStyle\Error\Error;
 use Symfony\Component\Process\ProcessBuilder;
 
-class Phpmd
+final class Phpmd extends Checker
 {
-    public static function checkMess($files, $rootDirectory)
+    /**
+     * {@inheritdoc}
+     */
+    public static function check(array $files, $rootDirectory = null)
     {
         $errors = [];
         foreach ($files as $file) {

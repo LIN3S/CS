@@ -11,10 +11,10 @@
 
 namespace LIN3S\CheckStyle;
 
-use LIN3S\CheckStyle\Checks\Composer;
-use LIN3S\CheckStyle\Checks\Git;
-use LIN3S\CheckStyle\Checks\Phpmd;
+use LIN3S\CheckStyle\Checker\Composer;
+use LIN3S\CheckStyle\Checker\Phpmd;
 use LIN3S\CheckStyle\Exception\CheckFailException;
+use LIN3S\CheckStyle\Fetcher\GitFetcher;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Application;
@@ -67,7 +67,7 @@ class CheckStyle extends Application
             $version = '0.0.1';
         }
         parent::__construct($name, $version);
-        $this->rootDirectory = null === $rootDirectory ? realpath(__DIR__ . '/../../../') : $rootDirectory;
+        $this->rootDirectory = null === $rootDirectory ? realpath(__DIR__ . '/../../../../') : $rootDirectory;
     }
 
     /**
@@ -80,13 +80,13 @@ class CheckStyle extends Application
 
         $output->writeln(sprintf('<fg=white;options=bold;bg=red>%s</fg=white;options=bold;bg=red>', $this->name));
         $output->writeln('<info>Fetching files...</info>');
-        $files = Git::getCommittedFiles();
+        $files = GitFetcher::committedFiles();
 
         $output->writeln('<info>Check composer</info>');
-        Composer::checkComposer($files);
+        Composer::check($files);
 
         $output->writeln('<info>Checking code mess with PHPMD</info>');
-        if (count(Phpmd::checkMess($files, $this->rootDirectory)) > 0) {
+        if (count(Phpmd::check($files, $this->rootDirectory)) > 0) {
             throw new CheckFailException('PHPMD');
         }
 
