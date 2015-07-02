@@ -20,6 +20,6 @@
         "symfony/filesystem":     "^2.7"
     },
     "autoload": {
-        "psr-4": { "LIN3S\\CheckStyle\\": "src/LIN3S" }
+        "psr-4": { "LIN3S\\CheckStyle\\": "src" }
     }
 }
