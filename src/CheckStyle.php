@@ -12,12 +12,13 @@
 namespace LIN3S\CheckStyle;
 
 use LIN3S\CheckStyle\Checker\Composer;
+use LIN3S\CheckStyle\Checker\PhpFormatter;
 use LIN3S\CheckStyle\Checker\Phpmd;
 use LIN3S\CheckStyle\Exception\CheckFailException;
 use LIN3S\CheckStyle\Fetcher\GitFetcher;
+use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Application;
 
 class CheckStyle extends Application
 {
@@ -84,6 +85,9 @@ class CheckStyle extends Application
 
         $output->writeln('<info>Check composer</info>');
         Composer::check($files);
+
+        $output->writeln('<info>Checking uses and license headers with PHP-formatter</info>');
+        PHPFormatter::check();
 
         $output->writeln('<info>Checking code mess with PHPMD</info>');
         if (count(Phpmd::check($files, $this->rootDirectory)) > 0) {

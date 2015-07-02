@@ -21,5 +21,5 @@ interface CheckerInterface
      *
      * @return mixed
      */
-    public static function check(array $files, $directory = null);
+    public static function check(array $files = [], $directory = null);
 }

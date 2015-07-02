@@ -20,7 +20,7 @@ final class Phpmd extends Checker
     /**
      * {@inheritdoc}
      */
-    public static function check(array $files, $rootDirectory = null)
+    public static function check(array $files = [], $rootDirectory = null)
     {
         $errors = [];
         foreach ($files as $file) {
@@ -28,7 +28,9 @@ final class Phpmd extends Checker
                 continue;
             }
 
-            $processBuilder = new ProcessBuilder(['php', 'bin/phpmd', $file, 'text', 'controversial']);
+            $processBuilder = new ProcessBuilder([
+                'php', 'vendor/phpmd/phpmd/bin/phpmd', $file, 'text', 'controversial'
+            ]);
             $processBuilder->setWorkingDirectory($rootDirectory);
             $process = $processBuilder->getProcess();
             $process->run();

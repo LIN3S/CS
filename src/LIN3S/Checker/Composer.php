@@ -18,7 +18,7 @@ final class Composer extends Checker
     /**
      * {@inheritdoc}
      */
-    public static function check(array $files, $directory = null)
+    public static function check(array $files = [], $directory = null)
     {
         $composerJsonDetected = false;
         $composerLockDetected = false;

@@ -1,4 +1,3 @@
-
 # This file is part of the Check Style package.
 #
 # Copyright (c) 2015 LIN3S <info@lin3s.com>
@@ -7,9 +6,6 @@
 # file that was distributed with this source code.
 
 use-sort:
-    group:
-        - _main
-        - LIN3S
     group-type: each
     sort-type: alph
     sort-direction: asc
