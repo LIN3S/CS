@@ -87,7 +87,7 @@ class CheckStyle extends Application
         Composer::check($files);
 
         $output->writeln('<info>Checking uses and license headers with PHP-formatter</info>');
-        PHPFormatter::check();
+        PHPFormatter::check([], $this->rootDirectory);
 
         $output->writeln('<info>Checking code mess with PHPMD</info>');
         if (count(Phpmd::check($files, $this->rootDirectory)) > 0) {

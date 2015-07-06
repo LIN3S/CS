@@ -14,11 +14,11 @@ namespace LIN3S\CheckStyle\Fetcher;
 class GitFetcher
 {
     /**
-     * Static wrapper of getCommittedFiles method.
+     * Non static wrapper of getCommittedFiles method.
      *
      * @return array
      */
-    public static function committedFiles()
+    public function getCommittedFiles()
     {
         return self::getCommittedFiles();
     }
@@ -28,7 +28,7 @@ class GitFetcher
      *
      * @return array
      */
-    public function getCommittedFiles()
+    public static function committedFiles()
     {
         $output = [];
         $rc = 0;
