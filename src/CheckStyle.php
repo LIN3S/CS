@@ -15,15 +15,14 @@ use LIN3S\CheckStyle\Checker\Composer;
 use LIN3S\CheckStyle\Checker\PhpFormatter;
 use LIN3S\CheckStyle\Checker\Phpmd;
 use LIN3S\CheckStyle\Exception\CheckFailException;
-use LIN3S\CheckStyle\Fetcher\GitFetcher;
+use LIN3S\CheckStyle\Git\Git;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Yaml\Yaml;
 
 class CheckStyle extends Application
 {
-    const PHP_FILES_IN_SRC = '/^src\/(.*)(\.php)$/';
-
     /**
      * The input.
      *
@@ -46,11 +45,11 @@ class CheckStyle extends Application
     private $output;
 
     /**
-     * The project root path directory.
+     * Array which contains the different parameters defined inside the .checkStyle.yml
      *
-     * @var string
+     * @var array
      */
-    protected $rootDirectory;
+    protected $parameters;
 
     /**
      * Constructor.
@@ -68,7 +67,10 @@ class CheckStyle extends Application
             $version = '0.0.1';
         }
         parent::__construct($name, $version);
-        $this->rootDirectory = null === $rootDirectory ? realpath(__DIR__ . '/../../../../') : $rootDirectory;
+
+        $rootDirectory = $rootDirectory ?: realpath(__DIR__ . '/../../../../');
+        $this->parameters = Yaml::parse(file_get_contents($rootDirectory . '/.checkStyle.yml'));
+        $this->parameters['rootDirectory'] = $rootDirectory;
     }
 
     /**
@@ -81,19 +83,24 @@ class CheckStyle extends Application
 
         $output->writeln(sprintf('<fg=white;options=bold;bg=red>%s</fg=white;options=bold;bg=red>', $this->name));
         $output->writeln('<info>Fetching files...</info>');
-        $files = GitFetcher::committedFiles();
+        $files = Git::committedFiles();
 
         $output->writeln('<info>Check composer</info>');
         Composer::check($files);
 
         $output->writeln('<info>Checking uses and license headers with PHP-formatter</info>');
-        PHPFormatter::check([], $this->rootDirectory);
+        PHPFormatter::check([], $this->parameters);
 
         $output->writeln('<info>Checking code mess with PHPMD</info>');
-        if (count(Phpmd::check($files, $this->rootDirectory)) > 0) {
+        $phpmdResult = Phpmd::check($files, $this->parameters);
+        if (count($phpmdResult) > 0) {
+            foreach ($phpmdResult as $error) {
+                $output->writeln($error->output());
+            }
             throw new CheckFailException('PHPMD');
         }
 
+        Git::addFiles($files, $this->parameters['rootDirectory']);
         $output->writeln('<info>Good job dude!</info>');
     }
 }

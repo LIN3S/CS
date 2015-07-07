@@ -16,10 +16,10 @@ interface CheckerInterface
     /**
      * Checks the given files.
      *
-     * @param array       $files     The files that going to be a check
-     * @param string|null $directory The directory where the checker is going to be execute
+     * @param array      $files      The files that going to be a check
+     * @param array|null $parameters The project parameters that declared inside the .checkStyle.yml
      *
      * @return mixed
      */
-    public static function check(array $files = [], $directory = null);
+    public static function check(array $files = [], array $parameters = null);
 }

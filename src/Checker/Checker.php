@@ -16,6 +16,21 @@ use LIN3S\CheckStyle\Checker\Interfaces\CheckerInterface;
 abstract class Checker implements CheckerInterface
 {
     /**
+     * Method that simplifies the use of regex to find
+     * an extension given file inside path given.
+     *
+     * @param mixed   $file     The file
+     * @param  string $path     The path
+     * @param string  $fileType The file type, by default is 'php'
+     *
+     * @return bool
+     */
+    protected static function exist($file, $path, $fileType = 'php')
+    {
+        return 0 !== preg_match('/^' . str_replace('/', '\/', $path) . '\/(.*)(\.' . $fileType . ')$/', $file);
+    }
+
+    /**
      * This class cannot be instantiated.
      */
     private function __construct()

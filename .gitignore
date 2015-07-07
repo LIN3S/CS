@@ -6,3 +6,4 @@
 # file that was distributed with this source code.
 
 vendor
+src/.formatter.yml

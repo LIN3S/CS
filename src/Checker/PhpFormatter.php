@@ -13,58 +13,58 @@ namespace LIN3S\CheckStyle\Checker;
 
 use LIN3S\CheckStyle\Exception\CheckFailException;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Process\Process;
 use Symfony\Component\Process\ProcessBuilder;
+use Symfony\Component\Yaml\Yaml;
 
 final class PhpFormatter extends Checker
 {
     /**
      * {@inheritdoc}
      */
-    public static function check(array $files = [], $rootDirectory = null)
+    public static function check(array $files = [], array $parameters = null)
     {
-        self::symLinkFormatterYamlFile($rootDirectory);
-        self::fixHeaders($rootDirectory);
-        self::sortUseStatements($rootDirectory);
+        self::updateFormatterYamlFile($parameters);
+        self::fixHeaders($parameters);
+        self::sortUseStatements($parameters);
     }
 
     /**
-     * Creates a symlink of .formatter.yml in the project root directory.
+     * Updates the project name of header block inside .formatter.yml.
      *
-     * @param string $rootDirectory The project root directory
+     * @param array $parameters The project parameters
      *
      * @return void
      * @throws \Exception when the symlink process fails
      */
-    private static function symLinkFormatterYamlFile($rootDirectory)
+    private static function updateFormatterYamlFile($parameters)
     {
-        $formatterYamlFile = $rootDirectory . '/.formatter.yml';
-        $fileSystem = new Filesystem();
+        $formatterYamlFile = Yaml::parse(file_get_contents(__DIR__ . '/../.formatter.yml.dist'));
 
-        try {
-            if ($fileSystem->exists($formatterYamlFile)) {
-                $fileSystem->remove($formatterYamlFile);
-            }
-            $fileSystem->symlink(__DIR__ . '/../.formatter.yml', $formatterYamlFile, true);
-        } catch (\Exception $exception) {
-            echo sprintf("Something wrong happens during the symlink process: \n%s\n", $exception->getMessage());
-        }
+        $formatterYamlFile['header'] = str_replace(
+            'CHANGE-FOR-PROJECT-NAME', $parameters['project']['name'], $formatterYamlFile['header']
+        );
+        file_put_contents(__DIR__ . '/../.formatter.yml', Yaml::dump($formatterYamlFile));
     }
 
     /**
      * Executes the Marc Morera's PHP-Formatter header fix command.
      *
-     * @param string $rootDirectory The project root directory
+     * @param array $parameters The project parameters
      *
      * @return void
      * @throws \LIN3S\CheckStyle\Exception\CheckFailException
      */
-    private static function fixHeaders($rootDirectory)
+    private static function fixHeaders($parameters)
     {
-        $processBuilder = new ProcessBuilder([
-            'php', 'vendor/mmoreram/php-formatter/bin/php-formatter', 'formatter:header:fix', 'src/'
-        ]);
-        $processBuilder->setWorkingDirectory($rootDirectory);
-        $process = $processBuilder->getProcess();
+        $process = new Process(
+            sprintf(
+                'php vendor/mmoreram/php-formatter/bin/php-formatter formatter:header:fix %s --config="%s"',
+                $parameters['phpFormatter']['path'],
+                __DIR__ . '/../'
+            ),
+            $parameters['rootDirectory']
+        );
         $process->run();
 
         if (!$process->isSuccessful()) {
@@ -76,17 +76,20 @@ final class PhpFormatter extends Checker
     /**
      * Executes the Marc Morera's PHP-Formatter sort use statements command.
      *
-     * @param string $rootDirectory The project root directory
+     * @param array $parameters The project parameters
      *
      * @return void
      * @throws \LIN3S\CheckStyle\Exception\CheckFailException
      */
-    private static function sortUseStatements($rootDirectory)
+    private static function sortUseStatements($parameters)
     {
         $processBuilder = new ProcessBuilder([
-            'php', 'vendor/mmoreram/php-formatter/bin/php-formatter', 'formatter:use:sort', 'src/'
+            'php',
+            'vendor/mmoreram/php-formatter/bin/php-formatter',
+            'formatter:use:sort',
+            $parameters['phpFormatter']['path']
         ]);
-        $processBuilder->setWorkingDirectory($rootDirectory);
+        $processBuilder->setWorkingDirectory($parameters['rootDirectory']);
         $process = $processBuilder->getProcess();
         $process->run();
 

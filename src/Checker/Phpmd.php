@@ -11,7 +11,6 @@
 
 namespace LIN3S\CheckStyle\Checker;
 
-use LIN3S\CheckStyle\CheckStyle;
 use LIN3S\CheckStyle\Error\Error;
 use Symfony\Component\Process\ProcessBuilder;
 
@@ -20,18 +19,27 @@ final class Phpmd extends Checker
     /**
      * {@inheritdoc}
      */
-    public static function check(array $files = [], $rootDirectory = null)
+    public static function check(array $files = [], array $parameters = null)
     {
+        $rules = '';
+        foreach ($parameters['phpmd']['rules'] as $rule) {
+            if ($rule === reset($parameters['phpmd']['rules'])) {
+                $rules .= $rule;
+                continue;
+            }
+            $rules .= sprintf(',%s', $rule);
+        }
+
         $errors = [];
         foreach ($files as $file) {
-            if (!preg_match(CheckStyle::PHP_FILES_IN_SRC, $file)) {
+            if (false === self::exist($file, $parameters['phpmd']['path'], 'php')) {
                 continue;
             }
 
             $processBuilder = new ProcessBuilder([
-                'php', 'vendor/phpmd/phpmd/bin/phpmd', $file, 'text', 'controversial'
+                'php', 'vendor/phpmd/phpmd/src/bin/phpmd', $file, 'text', $rules
             ]);
-            $processBuilder->setWorkingDirectory($rootDirectory);
+            $processBuilder->setWorkingDirectory($parameters['rootDirectory']);
             $process = $processBuilder->getProcess();
             $process->run();
 
@@ -39,7 +47,7 @@ final class Phpmd extends Checker
                 $errors[] = new Error(
                     $file,
                     sprintf('<error>%s</error>', trim($process->getErrorOutput())),
-                    sprintf('<info>%s</info>', trim($process->getOutput()))
+                    sprintf('<error>%s</error>', trim($process->getOutput()))
                 );
             }
         }

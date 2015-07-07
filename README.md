@@ -25,3 +25,27 @@ to install them, you should copy the code below in your `composer.json` and exec
     "require": {
         "lin3s/check-style": "dev-master"
     }
+
+
+WIP
+---
+
+This is the .checkStyle.yml file:
+
+    project:
+        name: Bizkarra
+        version: 0.1
+    
+    phpmd:
+        path: src/themes/bizkarra
+        rules:
+            - controversial
+            - unusedcode
+            # - codesize
+            # - naming
+    
+    phpFormatter:
+        path: src/themes/bizkarra
+
+
+The idea is to create a command that works like Stof's parameters loader and create dynamically the above file. 

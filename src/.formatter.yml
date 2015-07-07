@@ -1,21 +1,5 @@
-# This file is part of the Check Style package.
-#
-# Copyright (c) 2015 LIN3S <info@lin3s.com>
-#
-# For the full copyright and license information, please view the LICENSE
-# file that was distributed with this source code.
-
 use-sort:
     group-type: each
     sort-type: alph
     sort-direction: asc
-
-header: |
-    /*
-     * This file is part of the CHANGE-FOR-PROJECT-NAME project.
-     *
-     * Copyright (c) 2015 LIN3S <info@lin3s.com>
-     *
-     * For the full copyright and license information, please view the LICENSE
-     * file that was distributed with this source code.
-     */
+header: "/*\n * This file is part of the Bizkarra project.\n *\n * Copyright (c) 2015 LIN3S <info@lin3s.com>\n *\n * For the full copyright and license information, please view the LICENSE\n * file that was distributed with this source code.\n */\n"
