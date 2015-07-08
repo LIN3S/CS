@@ -34,4 +34,22 @@ final class Hooks
             echo sprintf("Something wrong happens during the symlink process: \n%s\n", $exception->getMessage());
         }
     }
+
+    /**
+     * Static method that creates .checkStyle.yml.dist if it does not exist.
+     */
+    public static function createDistFile()
+    {
+        $distFile = __DIR__ . '/../../../../../.checkStyle.yml.dist';
+        $fileSystem = new Filesystem();
+
+        try {
+            if ($fileSystem->exists($distFile)) {
+                return;
+            }
+            $fileSystem->copy(__DIR__ . '/../../.checkStyle.yml.dist', $distFile);
+        } catch (\Exception $exception) {
+            echo sprintf("Something wrong happens during the touch process: \n%s\n", $exception->getMessage());
+        }
+    }
 }

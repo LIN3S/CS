@@ -19,33 +19,28 @@ to install them, you should copy the code below in your `composer.json` and exec
         }
     ],
     "scripts": {
-        "pre-update-cmd": "LIN3S\\CheckStyle\\Composer\\Hooks::addToProject",
-        "pre-install-cmd": "LIN3S\\CheckStyle\\Composer\\Hooks::addToProject"
+        "post-update-cmd": [
+            "LIN3S\\CheckStyle\\Composer\\Hooks::createDistFile",
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "LIN3S\\CheckStyle\\Composer\\Hooks::addToProject"
+        ]
+        "post-install-cmd": [
+            "LIN3S\\CheckStyle\\Composer\\Hooks::createDistFile",
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "LIN3S\\CheckStyle\\Composer\\Hooks::addToProject"
+        ]
     },
     "require": {
         "lin3s/check-style": "dev-master"
+    },
+    "extra": {
+        "incenteev-parameters": {
+            "file": ".checkStyle.yml",
+            "dist-file": ".checkStyle.yml.dist"
+        }
     }
 
-
-WIP
----
-
-This is the .checkStyle.yml file:
-
-    project:
-        name: Bizkarra
-        version: 0.1
-    
-    phpmd:
-        path: src/themes/bizkarra
-        rules:
-            - controversial
-            - unusedcode
-            # - codesize
-            # - naming
-    
-    phpFormatter:
-        path: src/themes/bizkarra
-
-
-The idea is to create a command that works like Stof's parameters loader and create dynamically the above file. 
+Remember
+--------
+The `.checkStyle.yml` file is generated dynamically with Composer. The best practices recommend that only track the
+`.dist` file ignoring the `.checkStyle.yml` inside `.gitignore`

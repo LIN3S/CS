@@ -36,4 +36,11 @@ abstract class Checker implements CheckerInterface
     private function __construct()
     {
     }
+
+    /**
+     * This class cannot be cloned.
+     */
+    private function __clone()
+    {
+    }
 }

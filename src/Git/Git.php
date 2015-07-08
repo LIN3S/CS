@@ -17,26 +17,6 @@ use Symfony\Component\Process\Process;
 class Git
 {
     /**
-     * Non static wrapper of getCommittedFiles method.
-     *
-     * @return array
-     */
-    public function getCommittedFiles()
-    {
-        return self::getCommittedFiles();
-    }
-
-    /**
-     * Non static wrapper of addFiles method.
-     *
-     * @return array
-     */
-    public function addFilesToStage()
-    {
-        return self::getCommittedFiles();
-    }
-
-    /**
      * Gets all the files that are going to be committed.
      *
      * @return array

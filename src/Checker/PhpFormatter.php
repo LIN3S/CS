@@ -42,7 +42,7 @@ final class PhpFormatter extends Checker
         $formatterYamlFile = Yaml::parse(file_get_contents(__DIR__ . '/../.formatter.yml.dist'));
 
         $formatterYamlFile['header'] = str_replace(
-            'CHANGE-FOR-PROJECT-NAME', $parameters['project']['name'], $formatterYamlFile['header']
+            'CHANGE-FOR-PROJECT-NAME', $parameters['project_name'], $formatterYamlFile['header']
         );
         file_put_contents(__DIR__ . '/../.formatter.yml', Yaml::dump($formatterYamlFile));
     }
@@ -60,10 +60,10 @@ final class PhpFormatter extends Checker
         $process = new Process(
             sprintf(
                 'php vendor/mmoreram/php-formatter/bin/php-formatter formatter:header:fix %s --config="%s"',
-                $parameters['phpFormatter']['path'],
+                $parameters['phpformatter_path'],
                 __DIR__ . '/../'
             ),
-            $parameters['rootDirectory']
+            $parameters['root_directory']
         );
         $process->run();
 
@@ -87,9 +87,9 @@ final class PhpFormatter extends Checker
             'php',
             'vendor/mmoreram/php-formatter/bin/php-formatter',
             'formatter:use:sort',
-            $parameters['phpFormatter']['path']
+            $parameters['phpformatter_path']
         ]);
-        $processBuilder->setWorkingDirectory($parameters['rootDirectory']);
+        $processBuilder->setWorkingDirectory($parameters['root_directory']);
         $process = $processBuilder->getProcess();
         $process->run();
 

@@ -69,8 +69,8 @@ class CheckStyle extends Application
         parent::__construct($name, $version);
 
         $rootDirectory = $rootDirectory ?: realpath(__DIR__ . '/../../../../');
-        $this->parameters = Yaml::parse(file_get_contents($rootDirectory . '/.checkStyle.yml'));
-        $this->parameters['rootDirectory'] = $rootDirectory;
+        $this->parameters = Yaml::parse(file_get_contents($rootDirectory . '/.checkStyle.yml'))['parameters'];
+        $this->parameters['root_directory'] = $rootDirectory;
     }
 
     /**
@@ -100,7 +100,7 @@ class CheckStyle extends Application
             throw new CheckFailException('PHPMD');
         }
 
-        Git::addFiles($files, $this->parameters['rootDirectory']);
-        $output->writeln('<info>Good job dude!</info>');
+        Git::addFiles($files, $this->parameters['root_directory']);
+        $output->writeln('<info>Nice commit man!</info>');
     }
 }

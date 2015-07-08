@@ -15,10 +15,11 @@
         }
     ],
     "require": {
-        "mmoreram/php-formatter": "^1.0",
-        "phpmd/phpmd":            "^2.2",
-        "symfony/filesystem":     "^2.7",
-        "symfony/yaml":           "^2.7"
+        "incenteev/composer-parameter-handler": "^2.1",
+        "mmoreram/php-formatter":               "^1.0",
+        "phpmd/phpmd":                          "^2.2",
+        "symfony/filesystem":                   "^2.7",
+        "symfony/yaml":                         "^2.7"
     },
     "autoload": {
         "psr-4": { "LIN3S\\CheckStyle\\": "src" }
