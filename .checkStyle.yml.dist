@@ -8,7 +8,7 @@
 parameters:
     project_name: CHANGE-FOR-PROJECT-NAME
     project_version: 0.1
-    
+
     phpmd_path: src
     phpmd_rules:
         - controversial
@@ -17,3 +17,22 @@ parameters:
         - naming
 
     phpformatter_path: src
+
+    phpcsfixer_path: src
+    phpcsfixer_level: symfony       # can be psr0, psr1, psr2 or symfony
+    phpcsfixer_fixers:
+        - -unalign_double_arrow
+        - -concat_without_spaces
+
+        - align_double_arrow
+        - concat_with_spaces
+        - multiline_spaces_before_semicolon
+        - newline_after_open_tag
+        - ordered_use
+        - php4_constructor
+        - phpdoc_order
+        - phpdoc_var_to_type
+        - short_array_syntax
+        - short_echo_tag
+        - strict
+        - strict_param

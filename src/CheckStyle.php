@@ -12,6 +12,7 @@
 namespace LIN3S\CheckStyle;
 
 use LIN3S\CheckStyle\Checker\Composer;
+use LIN3S\CheckStyle\Checker\PhpCsFixer;
 use LIN3S\CheckStyle\Checker\PhpFormatter;
 use LIN3S\CheckStyle\Checker\Phpmd;
 use LIN3S\CheckStyle\Exception\CheckFailException;
@@ -90,6 +91,9 @@ class CheckStyle extends Application
 
         $output->writeln('<info>Checking uses and license headers with PHP-formatter</info>');
         PHPFormatter::check([], $this->parameters);
+
+        $output->writeln('<info>Fixing PHP code style with PHP-CS-Fixer</info>');
+        PhpCsFixer::check([], $this->parameters);
 
         $output->writeln('<info>Checking code mess with PHPMD</info>');
         $phpmdResult = Phpmd::check($files, $this->parameters);

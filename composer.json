@@ -15,6 +15,7 @@
         }
     ],
     "require": {
+        "fabpot/php-cs-fixer":                  "^1.9",
         "incenteev/composer-parameter-handler": "^2.1",
         "mmoreram/php-formatter":               "^1.0",
         "phpmd/phpmd":                          "^2.2",
