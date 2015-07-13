@@ -21,15 +21,6 @@ final class Phpmd extends Checker
      */
     public static function check(array $files = [], array $parameters = null)
     {
-        $rules = '';
-        foreach ($parameters['phpmd_rules'] as $rule) {
-            if ($rule === reset($parameters['phpmd_rules'])) {
-                $rules .= $rule;
-                continue;
-            }
-            $rules .= sprintf(',%s', $rule);
-        }
-
         $errors = [];
         foreach ($files as $file) {
             if (false === self::exist($file, $parameters['phpmd_path'], 'php')) {
@@ -37,7 +28,7 @@ final class Phpmd extends Checker
             }
 
             $processBuilder = new ProcessBuilder([
-                'php', 'vendor/phpmd/phpmd/src/bin/phpmd', $file, 'text', $rules
+                'php', 'vendor/phpmd/phpmd/src/bin/phpmd', $file, 'text', implode(',', $parameters['phpmd_rules'])
             ]);
             $processBuilder->setWorkingDirectory($parameters['root_directory']);
             $process = $processBuilder->getProcess();
