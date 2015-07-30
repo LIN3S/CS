@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Check Style package.
+ * This file is part of the CS library.
  *
  * Copyright (c) 2015 LIN3S <info@lin3s.com>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace LIN3S\CheckStyle\Checker\Interfaces;
+namespace LIN3S\CS\Checker\Interfaces;
 
 interface CheckerInterface
 {
@@ -17,7 +17,7 @@ interface CheckerInterface
      * Checks the given files.
      *
      * @param array      $files      The files that going to be a check
-     * @param array|null $parameters The project parameters that declared inside the .checkStyle.yml
+     * @param array|null $parameters The project parameters that declared inside the .lin3s_cs.yml
      *
      * @return mixed
      */

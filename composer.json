@@ -1,17 +1,14 @@
 {
-    "name": "lin3s/check-style",
-    "description": "Package that contains all the check styles for LIN3S projects",
+    "name": "lin3s/cs",
+    "description": "Flexible and customizable package to automatize all related with coding standards",
     "homepage": "http://lin3s.com",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
-            "name": "Gorka Laucirica",
-            "email": "gorka@lin3s.com"
-        },
-        {
-            "name": "Beñat Espiña",
-            "email": "bespina@lin3s.com"
+            "name": "LIN3S",
+            "email": "info@lin3s.com",
+            "homepage": "https://lin3s.com"
         }
     ],
     "require": {
@@ -23,6 +20,6 @@
         "symfony/yaml":                         "^2.7"
     },
     "autoload": {
-        "psr-4": { "LIN3S\\CheckStyle\\": "src" }
+        "psr-4": { "LIN3S\\CS\\": "src" }
     }
 }

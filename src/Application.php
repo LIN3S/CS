@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Check Style package.
+ * This file is part of the CS library.
  *
  * Copyright (c) 2015 LIN3S <info@lin3s.com>
  *
@@ -9,44 +9,44 @@
  * file that was distributed with this source code.
  */
 
-namespace LIN3S\CheckStyle;
+namespace LIN3S\CS;
 
-use LIN3S\CheckStyle\Checker\Composer;
-use LIN3S\CheckStyle\Checker\PhpCsFixer;
-use LIN3S\CheckStyle\Checker\PhpFormatter;
-use LIN3S\CheckStyle\Checker\Phpmd;
-use LIN3S\CheckStyle\Exception\CheckFailException;
-use LIN3S\CheckStyle\Git\Git;
-use Symfony\Component\Console\Application;
+use LIN3S\CS\Checker\Composer;
+use LIN3S\CS\Checker\PhpCsFixer;
+use LIN3S\CS\Checker\PhpFormatter;
+use LIN3S\CS\Checker\Phpmd;
+use LIN3S\CS\Exception\CheckFailException;
+use LIN3S\CS\Git\Git;
+use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Yaml\Yaml;
 
-class CheckStyle extends Application
+class Application extends BaseApplication
 {
     /**
      * The input.
      *
      * @var \Symfony\Component\Console\Input\InputInterface
      */
-    private $input;
+    protected $input;
 
     /**
      * The name of application.
      *
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * The output.
      *
      * @var \Symfony\Component\Console\Output\OutputInterface
      */
-    private $output;
+    protected $output;
 
     /**
-     * Array which contains the different parameters defined inside the .checkStyle.yml
+     * Array which contains the different parameters defined inside the .lin3s_cs.yml
      *
      * @var array
      */
@@ -62,7 +62,7 @@ class CheckStyle extends Application
     public function __construct($name = null, $version = null, $rootDirectory = null)
     {
         if (null === $this->name = $name) {
-            $this->name = 'LIN3S Check Style';
+            $this->name = 'LIN3S CS';
         }
         if (null === $version) {
             $version = '0.0.1';
@@ -70,7 +70,7 @@ class CheckStyle extends Application
         parent::__construct($name, $version);
 
         $rootDirectory = $rootDirectory ?: realpath(__DIR__ . '/../../../../');
-        $this->parameters = Yaml::parse(file_get_contents($rootDirectory . '/.checkStyle.yml'))['parameters'];
+        $this->parameters = Yaml::parse(file_get_contents($rootDirectory . '/.lin3s_cs.yml'))['parameters'];
         $this->parameters['root_directory'] = $rootDirectory;
     }
 

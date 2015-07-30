@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Check Style package.
+ * This file is part of the CS library.
  *
  * Copyright (c) 2015 LIN3S <info@lin3s.com>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace LIN3S\CheckStyle\Git;
+namespace LIN3S\CS\Git;
 
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;

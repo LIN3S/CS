@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Check Style package.
+ * This file is part of the CS library.
  *
  * Copyright (c) 2015 LIN3S <info@lin3s.com>
  *
@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace LIN3S\CheckStyle\Checker;
+namespace LIN3S\CS\Checker;
 
-use LIN3S\CheckStyle\Exception\CheckFailException;
+use LIN3S\CS\Exception\CheckFailException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\ProcessBuilder;
@@ -53,7 +53,7 @@ final class PhpFormatter extends Checker
      * @param array $parameters The project parameters
      *
      * @return void
-     * @throws \LIN3S\CheckStyle\Exception\CheckFailException
+     * @throws \LIN3S\CS\Exception\CheckFailException
      */
     private static function fixHeaders($parameters)
     {
@@ -79,7 +79,7 @@ final class PhpFormatter extends Checker
      * @param array $parameters The project parameters
      *
      * @return void
-     * @throws \LIN3S\CheckStyle\Exception\CheckFailException
+     * @throws \LIN3S\CS\Exception\CheckFailException
      */
     private static function sortUseStatements($parameters)
     {

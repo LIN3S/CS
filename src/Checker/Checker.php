@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Check Style package.
+ * This file is part of the CS library.
  *
  * Copyright (c) 2015 LIN3S <info@lin3s.com>
  *
@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace LIN3S\CheckStyle\Checker;
+namespace LIN3S\CS\Checker;
 
-use LIN3S\CheckStyle\Checker\Interfaces\CheckerInterface;
+use LIN3S\CS\Checker\Interfaces\CheckerInterface;
 
 abstract class Checker implements CheckerInterface
 {
