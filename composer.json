@@ -1,6 +1,6 @@
 {
     "name": "lin3s/cs",
-    "description": "Flexible and customizable package to automatize all related with coding standards",
+    "description": "The coding standards in the LIN3S way",
     "homepage": "http://lin3s.com",
     "type": "library",
     "license": "MIT",

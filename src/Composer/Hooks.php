@@ -26,7 +26,7 @@ final class Hooks
      * Static method that allows to create a hooks symlink
      * when Composer throws the install or update commands.
      */
-    public static function addToProject()
+    public static function addHooks()
     {
         $hooksDirectory = __DIR__ . '/../../../../../.git/hooks';
         $fileSystem = new Filesystem();
@@ -42,9 +42,26 @@ final class Hooks
     }
 
     /**
+     * Static method that allows to create a .editorconfig symlink
+     * when Composer throws the install or update commands.
+     */
+    public static function symlinkEditorConfig()
+    {
+        $editorConfig = __DIR__ . '/../../../../../.editorconfig';
+        $fileSystem = new Filesystem();
+
+        try {
+            $fileSystem->remove($editorConfig);
+            $fileSystem->symlink(__DIR__ . '/../../.editorconfig', $editorConfig, true);
+        } catch (\Exception $exception) {
+            echo sprintf("Something wrong happens during the symlink process: \n%s\n", $exception->getMessage());
+        }
+    }
+
+    /**
      * Static method that creates .lin3s_cs.yml.dist if it does not exist.
      */
-    public static function createDistFile()
+    public static function buildDistFile()
     {
         $distFile = __DIR__ . '/../../../../../.lin3s_cs.yml.dist';
         $fileSystem = new Filesystem();
