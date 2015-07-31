@@ -4,6 +4,8 @@
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
+#
+# @author Beñat Espiña <benatespina@gmail.com>
 
 use-sort:
     group-type: each
@@ -12,9 +14,9 @@ use-sort:
 
 header: |
     /*
-     * This file is part of the CHANGE-FOR-PROJECT-NAME project.
+     * This file is part of the CHANGE-FOR-YOUR-AWESOME-NAME CHANGE-FOR-TYPE.
      *
-     * Copyright (c) 2015 LIN3S <info@lin3s.com>
+     * Copyright (c) CHANGE-FOR-YEAR CHANGE-FOR-AUTHOR <CHANGE-FOR-EMAIL>
      *
      * For the full copyright and license information, please view the LICENSE
      * file that was distributed with this source code.

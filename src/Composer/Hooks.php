@@ -14,6 +14,12 @@ namespace LIN3S\CS\Composer;
 use Composer\Script\Event;
 use Symfony\Component\Filesystem\Filesystem;
 
+/**
+ * Composer scripts that connect your application
+ * with LIN3S CS in an easy way.
+ *
+ * @author Beñat Espiña <benatespina@gmail.com>
+ */
 final class Hooks
 {
     /**

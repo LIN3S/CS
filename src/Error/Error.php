@@ -11,6 +11,12 @@
 
 namespace LIN3S\CS\Error;
 
+/**
+ * Error class that encapsulates all checkers'
+ * errors in manage friendly domain object.
+ *
+ * @author Beñat Espiña <benatespina@gmail.com>
+ */
 class Error
 {
     /**

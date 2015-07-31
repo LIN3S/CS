@@ -17,6 +17,11 @@ use Symfony\Component\Process\Process;
 use Symfony\Component\Process\ProcessBuilder;
 use Symfony\Component\Yaml\Yaml;
 
+/**
+ * Checker that automatizes all the logic about Marc Morera's PHP Formatter.
+ *
+ * @author Beñat Espiña <benatespina@gmail.com>
+ */
 final class PhpFormatter extends Checker
 {
     /**
@@ -33,16 +38,25 @@ final class PhpFormatter extends Checker
      * Updates the project name of header block inside .formatter.yml.
      *
      * @param array $parameters The project parameters
-     *
-     * @return void
-     * @throws \Exception when the symlink process fails
      */
     private static function updateFormatterYamlFile($parameters)
     {
         $formatterYamlFile = Yaml::parse(file_get_contents(__DIR__ . '/../.formatter.yml.dist'));
 
         $formatterYamlFile['header'] = str_replace(
-            'CHANGE-FOR-PROJECT-NAME', $parameters['project_name'], $formatterYamlFile['header']
+            'CHANGE-FOR-YOUR-AWESOME-NAME', $parameters['name'], $formatterYamlFile['header']
+        );
+        $formatterYamlFile['header'] = str_replace(
+            'CHANGE-FOR-TYPE', $parameters['type'], $formatterYamlFile['header']
+        );
+        $formatterYamlFile['header'] = str_replace(
+            'CHANGE-FOR-YEAR', $parameters['year'], $formatterYamlFile['header']
+        );
+        $formatterYamlFile['header'] = str_replace(
+            'CHANGE-FOR-AUTHOR', $parameters['author'], $formatterYamlFile['header']
+        );
+        $formatterYamlFile['header'] = str_replace(
+            'CHANGE-FOR-EMAIL', $parameters['email'], $formatterYamlFile['header']
         );
         file_put_contents(__DIR__ . '/../.formatter.yml', Yaml::dump($formatterYamlFile));
     }
@@ -52,7 +66,6 @@ final class PhpFormatter extends Checker
      *
      * @param array $parameters The project parameters
      *
-     * @return void
      * @throws \LIN3S\CS\Exception\CheckFailException
      */
     private static function fixHeaders($parameters)
@@ -78,7 +91,6 @@ final class PhpFormatter extends Checker
      *
      * @param array $parameters The project parameters
      *
-     * @return void
      * @throws \LIN3S\CS\Exception\CheckFailException
      */
     private static function sortUseStatements($parameters)

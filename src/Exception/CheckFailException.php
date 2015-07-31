@@ -11,6 +11,11 @@
 
 namespace LIN3S\CS\Exception;
 
+/**
+ * Check fail exception custom exception.
+ *
+ * @author Beñat Espiña <benatespina@gmail.com>
+ */
 class CheckFailException extends \Exception
 {
     /**

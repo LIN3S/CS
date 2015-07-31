@@ -14,6 +14,11 @@ namespace LIN3S\CS\Checker;
 use LIN3S\CS\Exception\CheckFailException;
 use Symfony\Component\Process\ProcessBuilder;
 
+/**
+ * Checker that automatizes all the logic about Fabien Potencier's PHP CS Fixer.
+ *
+ * @author Beñat Espiña <benatespina@gmail.com>
+ */
 final class PhpCsFixer extends Checker
 {
     /**

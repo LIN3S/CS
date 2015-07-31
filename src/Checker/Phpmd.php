@@ -14,6 +14,11 @@ namespace LIN3S\CS\Checker;
 use LIN3S\CS\Error\Error;
 use Symfony\Component\Process\ProcessBuilder;
 
+/**
+ * Checker that automatizes all the logic about PHP Mess Detector.
+ *
+ * @author Beñat Espiña <benatespina@gmail.com>
+ */
 final class Phpmd extends Checker
 {
     /**

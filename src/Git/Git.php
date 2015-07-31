@@ -14,6 +14,12 @@ namespace LIN3S\CS\Git;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
+/**
+ * Git class is an abstraction layer of Git command line
+ * that provides some method to manage the committed files.
+ *
+ * @author Beñat Espiña <benatespina@gmail.com>
+ */
 class Git
 {
     /**

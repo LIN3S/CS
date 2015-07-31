@@ -13,6 +13,12 @@ namespace LIN3S\CS\Checker;
 
 use LIN3S\CS\Checker\Interfaces\CheckerInterface;
 
+/**
+ * Base abstract checker class. It is useful to provides some common
+ * helper methods and all checkers must only instantiate statically.
+ *
+ * @author Beñat Espiña <benatespina@gmail.com>
+ */
 abstract class Checker implements CheckerInterface
 {
     /**

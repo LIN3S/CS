@@ -4,10 +4,16 @@
 #
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
+#
+# @author Beñat Espiña <benatespina@gmail.com>
 
 parameters:
-    project_name: CHANGE-FOR-PROJECT-NAME
-    project_version: 0.1
+    name: CHANGE-FOR-YOUR-AWESOME-NAME
+    type: project
+    year: 2015
+    author: LIN3S
+    email: info@lin3s.com
+    version: 0.1
 
     phpmd_path: src
     phpmd_rules:

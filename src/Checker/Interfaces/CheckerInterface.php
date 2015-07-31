@@ -11,6 +11,12 @@
 
 namespace LIN3S\CS\Checker\Interfaces;
 
+/**
+ * Interface for different checkers in the application. This interface
+ * forces all checkers to implement "check" method in the following way.
+ *
+ * @author Beñat Espiña <benatespina@gmail.com>
+ */
 interface CheckerInterface
 {
     /**

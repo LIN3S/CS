@@ -22,6 +22,11 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Yaml\Yaml;
 
+/**
+ * Endpoint of LIN3S CS, this is the index of application.
+ *
+ * @author Beñat Espiña <benatespina@gmail.com>
+ */
 class Application extends BaseApplication
 {
     /**
