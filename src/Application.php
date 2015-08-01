@@ -15,6 +15,7 @@ use LIN3S\CS\Checker\Composer;
 use LIN3S\CS\Checker\PhpCsFixer;
 use LIN3S\CS\Checker\PhpFormatter;
 use LIN3S\CS\Checker\Phpmd;
+use LIN3S\CS\Checker\ScssLint;
 use LIN3S\CS\Exception\CheckFailException;
 use LIN3S\CS\Git\Git;
 use Symfony\Component\Console\Application as BaseApplication;
@@ -107,6 +108,15 @@ class Application extends BaseApplication
                 $output->writeln($error->output());
             }
             throw new CheckFailException('PHPMD');
+        }
+
+        $output->writeln('<info>Checking scss files with Scss-lint</info>');
+        $scssLintResult = ScssLint::check($files, $this->parameters);
+        if (count($scssLintResult) > 0) {
+            foreach ($scssLintResult as $error) {
+                $output->writeln($error->output());
+            }
+            throw new CheckFailException('Scss-lint');
         }
 
         Git::addFiles($files, $this->parameters['root_directory']);

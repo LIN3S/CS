@@ -42,3 +42,12 @@ parameters:
         - short_echo_tag
         - strict
         - strict_param
+
+    scsslint_path: app/Resources/assets/scss
+    scsslint_exclude:
+        - base/_reset.scss
+    scsslint_rules:                 # available rules can view for https://github.com/brigade/scss-lint/blob/master/config/default.yml
+        linters:
+            SelectorFormat:
+                enabled: true
+                convention: hyphenated_BEM
