@@ -11,7 +11,6 @@
 
 namespace LIN3S\CS\Git;
 
-use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
 /**
@@ -51,7 +50,6 @@ class Git
      * @param string|null $rootDirectory The directory where the command is going to be execute
      *
      * @return array
-     * @throws \Symfony\Component\Process\Exception\ProcessFailedException when the git add process fails
      */
     public static function addFiles(array $files, $rootDirectory = null)
     {
@@ -61,10 +59,6 @@ class Git
             }
             $process = new Process(sprintf('git add %s', $file), $rootDirectory);
             $process->run();
-
-            if (!$process->isSuccessful()) {
-                throw new ProcessFailedException($process);
-            }
         }
 
         return $files;

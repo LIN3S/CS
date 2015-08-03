@@ -2,6 +2,7 @@
 > The coding standards in the LIN3S way.
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/854eee6e-101f-40ca-a3be-fb41b01abcc9/mini.png)](https://insight.sensiolabs.com/projects/854eee6e-101f-40ca-a3be-fb41b01abcc9)
+[![Build Status](https://travis-ci.org/LIN3S/CS.svg?branch=master)](https://travis-ci.org/LIN3S/CS)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/LIN3S/CS/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/LIN3S/CS/?branch=master)
 [![Total Downloads](https://poser.pugx.org/lin3s/cs/downloads)](https://packagist.org/packages/lin3s/cs)
 &nbsp;&nbsp;&nbsp;&nbsp;

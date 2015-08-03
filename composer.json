@@ -19,7 +19,13 @@
         "symfony/filesystem":                   "^2.7",
         "symfony/yaml":                         "^2.7"
     },
+    "require-dev": {
+        "phpspec/phpspec":                      "^2.2"
+    },
     "autoload": {
         "psr-4": { "LIN3S\\CS\\": "src" }
+    },
+    "autoload-dev": {
+        "psr-4": { "spec\\LIN3S\\CS\\": "spec" }
     }
 }
