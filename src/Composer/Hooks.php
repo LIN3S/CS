@@ -11,7 +11,6 @@
 
 namespace LIN3S\CS\Composer;
 
-use Composer\Script\Event;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**

@@ -13,7 +13,6 @@ namespace LIN3S\CS\Checker;
 
 use LIN3S\CS\Error\Error;
 use Symfony\Component\Process\Process;
-use Symfony\Component\Process\ProcessBuilder;
 use Symfony\Component\Yaml\Yaml;
 
 /**

@@ -12,7 +12,6 @@
 namespace LIN3S\CS\Checker;
 
 use LIN3S\CS\Exception\CheckFailException;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\ProcessBuilder;
 use Symfony\Component\Yaml\Yaml;
