@@ -12,6 +12,7 @@
 namespace LIN3S\CS;
 
 use LIN3S\CS\Checker\Composer;
+use LIN3S\CS\Checker\EsLint;
 use LIN3S\CS\Checker\PhpCsFixer;
 use LIN3S\CS\Checker\PhpFormatter;
 use LIN3S\CS\Checker\Phpmd;
@@ -117,6 +118,15 @@ class Application extends BaseApplication
                 $output->writeln($error->output());
             }
             throw new CheckFailException('Scss-lint');
+        }
+
+        $output->writeln('<info>Checking js files with ESLint</info>');
+        $esLintResult = EsLint::check($files, $this->parameters);
+        if (count($esLintResult) > 0) {
+            foreach ($esLintResult as $error) {
+                $output->writeln($error->output());
+            }
+            throw new CheckFailException('ESLint');
         }
 
         Git::addFiles($files, $this->parameters['root_directory']);

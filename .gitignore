@@ -10,3 +10,4 @@
 vendor
 src/.formatter.yml
 src/.scss_lint.yml
+src/.eslint.yml

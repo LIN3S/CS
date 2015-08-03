@@ -17,38 +17,38 @@ use Symfony\Component\Process\ProcessBuilder;
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * Checker that automatizes all the logic about Scss Lint.
+ * Checker that automatizes all the logic about ESLint.
  *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
-final class ScssLint extends Checker
+final class EsLint extends Checker
 {
     /**
      * {@inheritdoc}
      */
     public static function check(array $files = [], array $parameters = null)
     {
-        $scssLintYamlFile = array_replace_recursive(
-            Yaml::parse(file_get_contents(__DIR__ . '/../.scss_lint.yml.dist')),
-            $parameters['scsslint_rules']
+        $esLintYamlFile = array_replace_recursive(
+            Yaml::parse(file_get_contents(__DIR__ . '/../.eslint.yml.dist')),
+            $parameters['eslint_rules']
         );
-        file_put_contents(__DIR__ . '/../.scss_lint.yml', Yaml::dump($scssLintYamlFile));
+        file_put_contents(__DIR__ . '/../.eslint.yml', Yaml::dump($esLintYamlFile));
 
         $excludes = [];
-        if (true === array_key_exists('scsslint_exclude', $parameters)) {
-            foreach ($parameters['scsslint_exclude'] as $key => $exclude) {
-                $excludes[$key] = $parameters['scsslint_path'] . '/' . $exclude;
+        if (true === array_key_exists('eslint_exclude', $parameters)) {
+            foreach ($parameters['eslint_exclude'] as $key => $exclude) {
+                $excludes[$key] = $parameters['eslint_path'] . '/' . $exclude;
             }
         }
 
         $errors = [];
         foreach ($files as $file) {
-            if (false === self::exist($file, $parameters['scsslint_path'], 'scss') || in_array($file, $excludes)) {
+            if (false === self::exist($file, $parameters['eslint_path'], 'js') || in_array($file, $excludes)) {
                 continue;
             }
 
             $process = new Process(
-                sprintf('scss-lint %s -c vendor/lin3s/cs/src/.scss_lint.yml', $file), $parameters['root_directory']
+                sprintf('eslint %s -c vendor/lin3s/cs/src/.eslint.yml', $file), $parameters['root_directory']
             );
             $process->run();
             if (!$process->isSuccessful()) {
