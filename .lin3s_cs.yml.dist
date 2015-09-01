@@ -25,7 +25,7 @@ parameters:
     phpformatter_path: src
 
     phpcsfixer_path: src
-    phpcsfixer_level: symfony       # can be psr0, psr1, psr2 or symfony
+    phpcsfixer_level: symfony   # can be psr0, psr1, psr2 or symfony
     phpcsfixer_fixers:
         - -unalign_double_arrow
         - -concat_without_spaces
@@ -44,16 +44,18 @@ parameters:
         - strict_param
 
     scsslint_path: app/Resources/assets/scss
+    scsslint_file_location: vendor/lin3s/cs/src/
     scsslint_exclude:
         - base/_reset.scss
-    scsslint_rules:                 # available rules can view in https://github.com/brigade/scss-lint/blob/master/config/default.yml
+    scsslint_rules:             # available rules can view for https://github.com/brigade/scss-lint/blob/master/config/default.yml
         linters:
             SelectorFormat:
                 enabled: true
                 convention: hyphenated_BEM
     eslint_path: app/Resources/assets/js
+    eslint_file_location: vendor/lin3s/cs/src
     eslint_exclude: []
-    eslint_rules:                   # available rules can view in http://eslint.org/docs/rules/
+    eslint_rules:               # available rules can view in http://eslint.org/docs/rules/
         ecmaFeatures: []
         env:
             browser: true

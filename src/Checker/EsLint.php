@@ -12,6 +12,7 @@
 namespace LIN3S\CS\Checker;
 
 use LIN3S\CS\Error\Error;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Yaml\Yaml;
 
@@ -28,10 +29,10 @@ final class EsLint extends Checker
     public static function check(array $files = [], array $parameters = null)
     {
         $esLintYamlFile = array_replace_recursive(
-            Yaml::parse(file_get_contents(__DIR__ . '/../.eslint.yml.dist')),
-            $parameters['eslint_rules']
+            Yaml::parse(file_get_contents(__DIR__ . '/../.eslint.yml.dist')), $parameters['eslint_rules']
         );
-        file_put_contents(__DIR__ . '/../.eslint.yml', Yaml::dump($esLintYamlFile));
+        $esLintFileLocation = $parameters['root_directory'] . $parameters['eslint_file_location'];
+        static::createEsLintFile($esLintFileLocation, Yaml::dump($esLintYamlFile));
 
         $excludes = [];
         if (true === array_key_exists('eslint_exclude', $parameters)) {
@@ -47,7 +48,7 @@ final class EsLint extends Checker
             }
 
             $process = new Process(
-                sprintf('eslint %s -c vendor/lin3s/cs/src/.eslint.yml', $file), $parameters['root_directory']
+                sprintf('eslint %s -c %s/.eslint.yml', $file, $esLintFileLocation), $parameters['root_directory']
             );
             $process->run();
             if (!$process->isSuccessful()) {
@@ -60,5 +61,25 @@ final class EsLint extends Checker
         }
 
         return $errors;
+    }
+
+    /**
+     * Static method that allows to create a .eslint.yml file.
+     *
+     * @param string $location The location path of .eslint.yml
+     * @param string $content  The content of file
+     */
+    private static function createEsLintFile($location, $content)
+    {
+        $fileSystem = new Filesystem();
+        $location .= '/.eslint.yml';
+
+        try {
+            $fileSystem->remove($location);
+            $fileSystem->touch($location);
+            file_put_contents($location, $content);
+        } catch (\Exception $exception) {
+            echo sprintf("Something wrong happens during the creating process: \n%s\n", $exception->getMessage());
+        }
     }
 }

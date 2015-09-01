@@ -12,7 +12,9 @@
 namespace LIN3S\CS\Checker;
 
 use LIN3S\CS\Error\Error;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
+use Symfony\Component\Process\ProcessBuilder;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -28,16 +30,14 @@ final class ScssLint extends Checker
     public static function check(array $files = [], array $parameters = null)
     {
         $scssLintYamlFile = array_replace_recursive(
-            Yaml::parse(file_get_contents(__DIR__ . '/../.scss_lint.yml.dist')),
-            $parameters['scsslint_rules']
+            Yaml::parse(file_get_contents(__DIR__ . '/../.scss_lint.yml.dist')), $parameters['scsslint_rules']
         );
-        file_put_contents(__DIR__ . '/../.scss_lint.yml', Yaml::dump($scssLintYamlFile));
+        $scssLintFileLocation = $parameters['root_directory'] . $parameters['scsslint_file_location'];
+        static::createScssLintFile($scssLintFileLocation, Yaml::dump($scssLintYamlFile));
 
         $excludes = [];
-        if (true === array_key_exists('scsslint_exclude', $parameters)) {
-            foreach ($parameters['scsslint_exclude'] as $key => $exclude) {
-                $excludes[$key] = $parameters['scsslint_path'] . '/' . $exclude;
-            }
+        foreach ($parameters['scsslint_exclude'] as $key => $exclude) {
+            $excludes[$key] = $parameters['scsslint_path'] . '/' . $exclude;
         }
 
         $errors = [];
@@ -47,7 +47,8 @@ final class ScssLint extends Checker
             }
 
             $process = new Process(
-                sprintf('scss-lint %s -c vendor/lin3s/cs/src/.scss_lint.yml', $file), $parameters['root_directory']
+                sprintf('scss-lint %s -c %s/.scss_lint.yml', $file, $scssLintFileLocation),
+                $parameters['root_directory']
             );
             $process->run();
             if (!$process->isSuccessful()) {
@@ -60,5 +61,25 @@ final class ScssLint extends Checker
         }
 
         return $errors;
+    }
+
+    /**
+     * Static method that allows to create a .scss_lint.yml file.
+     *
+     * @param string $location The location path of .scss_lint.yml
+     * @param string $content  The content of file
+     */
+    private static function createScssLintFile($location, $content)
+    {
+        $fileSystem = new Filesystem();
+        $location .= '/.scss_lint.yml';
+
+        try {
+            $fileSystem->remove($location);
+            $fileSystem->touch($location);
+            file_put_contents($location, $content);
+        } catch (\Exception $exception) {
+            echo sprintf("Something wrong happens during the creating process: \n%s\n", $exception->getMessage());
+        }
     }
 }
