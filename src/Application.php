@@ -96,37 +96,47 @@ class Application extends BaseApplication
         $output->writeln('<info>Check composer</info>');
         Composer::check($files);
 
-        $output->writeln('<info>Checking uses and license headers with PHP-formatter</info>');
-        PHPFormatter::check([], $this->parameters);
-
-        $output->writeln('<info>Fixing PHP code style with PHP-CS-Fixer</info>');
-        PhpCsFixer::check([], $this->parameters);
-
-        $output->writeln('<info>Checking code mess with PHPMD</info>');
-        $phpmdResult = Phpmd::check($files, $this->parameters);
-        if (count($phpmdResult) > 0) {
-            foreach ($phpmdResult as $error) {
-                $output->writeln($error->output());
-            }
-            throw new CheckFailException('PHPMD');
+        if (in_array('phpformatter', $this->parameters['enabled'])) {
+            $output->writeln('<info>Checking uses and license headers with PHP-formatter</info>');
+            PHPFormatter::check([], $this->parameters);
         }
 
-        $output->writeln('<info>Checking scss files with Scss-lint</info>');
-        $scssLintResult = ScssLint::check($files, $this->parameters);
-        if (count($scssLintResult) > 0) {
-            foreach ($scssLintResult as $error) {
-                $output->writeln($error->output());
-            }
-            throw new CheckFailException('Scss-lint');
+        if (in_array('phpcsfixer', $this->parameters['enabled'])) {
+            $output->writeln('<info>Fixing PHP code style with PHP-CS-Fixer</info>');
+            PhpCsFixer::check([], $this->parameters);
         }
 
-        $output->writeln('<info>Checking js files with ESLint</info>');
-        $esLintResult = EsLint::check($files, $this->parameters);
-        if (count($esLintResult) > 0) {
-            foreach ($esLintResult as $error) {
-                $output->writeln($error->output());
+        if (in_array('phpmd', $this->parameters['enabled'])) {
+            $output->writeln('<info>Checking code mess with PHPMD</info>');
+            $phpmdResult = Phpmd::check($files, $this->parameters);
+            if (count($phpmdResult) > 0) {
+                foreach ($phpmdResult as $error) {
+                    $output->writeln($error->output());
+                }
+                throw new CheckFailException('PHPMD');
             }
-            throw new CheckFailException('ESLint');
+        }
+
+        if (in_array('scsslint', $this->parameters['enabled'])) {
+            $output->writeln('<info>Checking scss files with Scss-lint</info>');
+            $scssLintResult = ScssLint::check($files, $this->parameters);
+            if (count($scssLintResult) > 0) {
+                foreach ($scssLintResult as $error) {
+                    $output->writeln($error->output());
+                }
+                throw new CheckFailException('Scss-lint');
+            }
+        }
+
+        if (in_array('eslint', $this->parameters['enabled'])) {
+            $output->writeln('<info>Checking js files with ESLint</info>');
+            $esLintResult = EsLint::check($files, $this->parameters);
+            if (count($esLintResult) > 0) {
+                foreach ($esLintResult as $error) {
+                    $output->writeln($error->output());
+                }
+                throw new CheckFailException('ESLint');
+            }
         }
 
         Git::addFiles($files, $this->parameters['root_directory']);

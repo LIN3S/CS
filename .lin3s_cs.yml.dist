@@ -8,6 +8,13 @@
 # @author Beñat Espiña <benatespina@gmail.com>
 
 parameters:
+    enabled:
+        - phpmd
+        - phpformatter
+        - phpcsfixer
+        - scsslint
+        - eslint
+
     name: CHANGE-FOR-YOUR-AWESOME-NAME
     type: project
     year: 2015
