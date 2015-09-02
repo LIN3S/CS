@@ -31,7 +31,7 @@ final class ScssLint extends Checker
         $scssLintYamlFile = array_replace_recursive(
             Yaml::parse(file_get_contents(__DIR__ . '/../.scss_lint.yml.dist')), $parameters['scsslint_rules']
         );
-        $scssLintFileLocation = $parameters['root_directory'] . $parameters['scsslint_file_location'];
+        $scssLintFileLocation = $parameters['root_directory']  . '/' . $parameters['scsslint_file_location'];
         static::createScssLintFile($scssLintFileLocation, Yaml::dump($scssLintYamlFile));
 
         $excludes = [];

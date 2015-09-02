@@ -31,7 +31,7 @@ final class EsLint extends Checker
         $esLintYamlFile = array_replace_recursive(
             Yaml::parse(file_get_contents(__DIR__ . '/../.eslint.yml.dist')), $parameters['eslint_rules']
         );
-        $esLintFileLocation = $parameters['root_directory'] . $parameters['eslint_file_location'];
+        $esLintFileLocation = $parameters['root_directory']  . '/' . $parameters['eslint_file_location'];
         static::createEsLintFile($esLintFileLocation, Yaml::dump($esLintYamlFile));
 
         $excludes = [];
