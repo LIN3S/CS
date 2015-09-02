@@ -132,4 +132,14 @@ class Application extends BaseApplication
         Git::addFiles($files, $this->parameters['root_directory']);
         $output->writeln('<info>Nice commit man!</info>');
     }
+
+    /**
+     * Gets the parameters array.
+     *
+     * @return array
+     */
+    public function parameters()
+    {
+        return $this->parameters;
+    }
 }

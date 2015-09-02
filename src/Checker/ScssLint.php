@@ -28,12 +28,7 @@ final class ScssLint extends Checker
      */
     public static function check(array $files = [], array $parameters = null)
     {
-        $scssLintYamlFile = array_replace_recursive(
-            Yaml::parse(file_get_contents(__DIR__ . '/../.scss_lint.yml.dist')), $parameters['scsslint_rules']
-        );
-        $scssLintFileLocation = $parameters['root_directory']  . '/' . $parameters['scsslint_file_location'];
-        static::createScssLintFile($scssLintFileLocation, Yaml::dump($scssLintYamlFile));
-
+        static::scssLintFile($parameters);
         $excludes = [];
         foreach ($parameters['scsslint_exclude'] as $key => $exclude) {
             $excludes[$key] = $parameters['scsslint_path'] . '/' . $exclude;
@@ -46,7 +41,7 @@ final class ScssLint extends Checker
             }
 
             $process = new Process(
-                sprintf('scss-lint %s -c %s/.scss_lint.yml', $file, $scssLintFileLocation),
+                sprintf('scss-lint %s -c %s/.scss_lint.yml', $file, static::location($parameters)),
                 $parameters['root_directory']
             );
             $process->run();
@@ -65,20 +60,37 @@ final class ScssLint extends Checker
     /**
      * Static method that allows to create a .scss_lint.yml file.
      *
-     * @param string $location The location path of .scss_lint.yml
-     * @param string $content  The content of file
+     * @param array $parameters Array which contains the different parameters
+     *
+     * @internal param string $location The location path of .scss_lint.yml
+     * @internal param string $content The content of file
      */
-    private static function createScssLintFile($location, $content)
+    public static function scssLintFile($parameters)
     {
+        $yaml = array_replace_recursive(
+            Yaml::parse(file_get_contents(__DIR__ . '/../.scss_lint.yml.dist')), $parameters['scsslint_rules']
+        );
+        $location = static::location($parameters) . '/.scss_lint.yml';
         $fileSystem = new Filesystem();
-        $location .= '/.scss_lint.yml';
 
         try {
             $fileSystem->remove($location);
             $fileSystem->touch($location);
-            file_put_contents($location, $content);
+            file_put_contents($location, Yaml::dump($yaml));
         } catch (\Exception $exception) {
             echo sprintf("Something wrong happens during the creating process: \n%s\n", $exception->getMessage());
         }
+    }
+
+    /**
+     * Gets the location path of .scss_lint.yml.
+     *
+     * @param array $parameters Array which contains the different parameters
+     *
+     * @return string
+     */
+    private static function location($parameters)
+    {
+        return $parameters['root_directory'] . '/' . $parameters['scsslint_file_location'];
     }
 }

@@ -11,6 +11,9 @@
 
 namespace LIN3S\CS\Composer;
 
+use LIN3S\CS\Application;
+use LIN3S\CS\Checker\EsLint;
+use LIN3S\CS\Checker\ScssLint;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
@@ -41,23 +44,6 @@ final class Hooks
     }
 
     /**
-     * Static method that allows to create a .editorconfig symlink
-     * when Composer throws the install or update commands.
-     */
-    public static function symlinkEditorConfig()
-    {
-        $editorConfig = __DIR__ . '/../../../../../.editorconfig';
-        $fileSystem = new Filesystem();
-
-        try {
-            $fileSystem->remove($editorConfig);
-            $fileSystem->symlink(__DIR__ . '/../../.editorconfig', $editorConfig, true);
-        } catch (\Exception $exception) {
-            echo sprintf("Something wrong happens during the symlink process: \n%s\n", $exception->getMessage());
-        }
-    }
-
-    /**
      * Static method that creates .lin3s_cs.yml.dist if it does not exist.
      */
     public static function buildDistFile()
@@ -72,6 +58,28 @@ final class Hooks
             $fileSystem->copy(__DIR__ . '/../../.lin3s_cs.yml.dist', $distFile);
         } catch (\Exception $exception) {
             echo sprintf("Something wrong happens during the touch process: \n%s\n", $exception->getMessage());
+        }
+    }
+
+    /**
+     * Static method that allows to create a .editorconfig symlink,
+     * .scss_lint.yml and .eslint.yml files when Composer throws the
+     * install or update commands.
+     */
+    public static function addFiles()
+    {
+        $app = new Application();
+        ScssLint::scssLintFile($app->parameters());
+        EsLint::esLintFile($app->parameters());
+
+        $editorConfig = __DIR__ . '/../../../../../.editorconfig';
+        $fileSystem = new Filesystem();
+
+        try {
+            $fileSystem->remove($editorConfig);
+            $fileSystem->symlink(__DIR__ . '/../../.editorconfig', $editorConfig, true);
+        } catch (\Exception $exception) {
+            echo sprintf("Something wrong happens during the symlink process: \n%s\n", $exception->getMessage());
         }
     }
 }

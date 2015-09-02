@@ -28,12 +28,7 @@ final class EsLint extends Checker
      */
     public static function check(array $files = [], array $parameters = null)
     {
-        $esLintYamlFile = array_replace_recursive(
-            Yaml::parse(file_get_contents(__DIR__ . '/../.eslint.yml.dist')), $parameters['eslint_rules']
-        );
-        $esLintFileLocation = $parameters['root_directory']  . '/' . $parameters['eslint_file_location'];
-        static::createEsLintFile($esLintFileLocation, Yaml::dump($esLintYamlFile));
-
+        static::esLintFile($parameters);
         $excludes = [];
         if (true === array_key_exists('eslint_exclude', $parameters)) {
             foreach ($parameters['eslint_exclude'] as $key => $exclude) {
@@ -48,7 +43,8 @@ final class EsLint extends Checker
             }
 
             $process = new Process(
-                sprintf('eslint %s -c %s/.eslint.yml', $file, $esLintFileLocation), $parameters['root_directory']
+                sprintf('eslint %s -c %s/.eslint.yml', $file, static::location($parameters)),
+                $parameters['root_directory']
             );
             $process->run();
             if (!$process->isSuccessful()) {
@@ -66,20 +62,37 @@ final class EsLint extends Checker
     /**
      * Static method that allows to create a .eslint.yml file.
      *
-     * @param string $location The location path of .eslint.yml
-     * @param string $content  The content of file
+     * @param array $parameters Array which contains the different parameters
+     *
+     * @internal param string $location The location path of .scss_lint.yml
+     * @internal param string $content The content of file
      */
-    private static function createEsLintFile($location, $content)
+    public static function esLintFile($parameters)
     {
+        $yaml = array_replace_recursive(
+            Yaml::parse(file_get_contents(__DIR__ . '/../.eslint.yml.dist')), $parameters['eslint_rules']
+        );
+        $location = static::location($parameters) . '/.eslint.yml';
         $fileSystem = new Filesystem();
-        $location .= '/.eslint.yml';
 
         try {
             $fileSystem->remove($location);
             $fileSystem->touch($location);
-            file_put_contents($location, $content);
+            file_put_contents($location, Yaml::dump($yaml));
         } catch (\Exception $exception) {
             echo sprintf("Something wrong happens during the creating process: \n%s\n", $exception->getMessage());
         }
+    }
+
+    /**
+     * Gets the location path of .eslint.yml.
+     *
+     * @param array $parameters Array which contains the different parameters
+     *
+     * @return string
+     */
+    private static function location($parameters)
+    {
+        return $parameters['root_directory'] . '/' . $parameters['eslint_file_location'];
     }
 }

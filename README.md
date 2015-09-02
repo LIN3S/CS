@@ -50,13 +50,13 @@ Then you have to update the `composer.json` with the following code:
         "LIN3S\\CS\\Composer\\Hooks::buildDistFile",
         "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
         "LIN3S\\CS\\Composer\\Hooks::addHooks",
-        "LIN3S\\CS\\Composer\\Hooks::symlinkEditorConfig"
+        "LIN3S\\CS\\Composer\\Hooks::addFiles"
     ]
     "post-install-cmd": [
         "LIN3S\\CS\\Composer\\Hooks::buildDistFile",
         "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
         "LIN3S\\CS\\Composer\\Hooks::addHooks",
-        "LIN3S\\CS\\Composer\\Hooks::symlinkEditorConfig"
+        "LIN3S\\CS\\Composer\\Hooks::addFiles"
     ]
 },
 "extra": {

@@ -25,9 +25,9 @@ abstract class Checker implements CheckerInterface
      * Method that simplifies the use of regex to find
      * an extension given file inside path given.
      *
-     * @param mixed   $file     The file
-     * @param  string $path     The path
-     * @param string  $fileType The file type, by default is 'php'
+     * @param mixed  $file     The file
+     * @param string $path     The path
+     * @param string $fileType The file type, by default is 'php'
      *
      * @return bool
      */
