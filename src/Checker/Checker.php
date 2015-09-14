@@ -37,6 +37,18 @@ abstract class Checker implements CheckerInterface
     }
 
     /**
+     * Checks if the tool is installed in the machine,
+     * otherwise throws an exception.
+     *
+     * @param string $tool The name of the tool
+     *
+     * @throws \LIN3S\CS\Exception\ToolUnavailableException when the tool is unavailable
+     */
+    protected static function isAvailable($tool)
+    {
+    }
+
+    /**
      * This class cannot be instantiated.
      */
     private function __construct()

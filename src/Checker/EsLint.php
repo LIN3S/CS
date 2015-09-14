@@ -12,6 +12,7 @@
 namespace LIN3S\CS\Checker;
 
 use LIN3S\CS\Error\Error;
+use LIN3S\CS\Exception\ToolUnavailableException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Yaml\Yaml;
@@ -28,6 +29,7 @@ final class EsLint extends Checker
      */
     public static function check(array $files = [], array $parameters = null)
     {
+        static::isAvailable('eslint');
         static::esLintFile($parameters);
         $excludes = [];
         if (true === array_key_exists('eslint_exclude', $parameters)) {
@@ -94,5 +96,18 @@ final class EsLint extends Checker
     private static function location($parameters)
     {
         return $parameters['root_directory'] . '/' . $parameters['eslint_file_location'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected static function isAvailable($tool)
+    {
+        $process = new Process(sprintf('%s -v', $tool));
+        $process->run();
+
+        if (!$process->isSuccessful()) {
+            throw new ToolUnavailableException($tool);
+        }
     }
 }

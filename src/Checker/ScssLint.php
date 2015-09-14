@@ -12,6 +12,7 @@
 namespace LIN3S\CS\Checker;
 
 use LIN3S\CS\Error\Error;
+use LIN3S\CS\Exception\ToolUnavailableException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Yaml\Yaml;
@@ -28,6 +29,7 @@ final class ScssLint extends Checker
      */
     public static function check(array $files = [], array $parameters = null)
     {
+        static::isAvailable('scss-lint');
         static::scssLintFile($parameters);
         $excludes = [];
         foreach ($parameters['scsslint_exclude'] as $key => $exclude) {
@@ -79,6 +81,19 @@ final class ScssLint extends Checker
             file_put_contents($location, Yaml::dump($yaml));
         } catch (\Exception $exception) {
             echo sprintf("Something wrong happens during the creating process: \n%s\n", $exception->getMessage());
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected static function isAvailable($tool)
+    {
+        $process = new Process(sprintf('%s -v', $tool));
+        $process->run();
+
+        if (!$process->isSuccessful()) {
+            throw new ToolUnavailableException($tool);
         }
     }
 
