@@ -98,12 +98,12 @@ class Application extends BaseApplication
 
         if (in_array('phpformatter', $this->parameters['enabled'])) {
             $output->writeln('<info>Checking uses and license headers with PHP-formatter</info>');
-            PHPFormatter::check([], $this->parameters);
+            PHPFormatter::check($files, $this->parameters);
         }
 
         if (in_array('phpcsfixer', $this->parameters['enabled'])) {
             $output->writeln('<info>Fixing PHP code style with PHP-CS-Fixer</info>');
-            PhpCsFixer::check([], $this->parameters);
+            PhpCsFixer::check($files, $this->parameters);
         }
 
         if (in_array('phpmd', $this->parameters['enabled'])) {

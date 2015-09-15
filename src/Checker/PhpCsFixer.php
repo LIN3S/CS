@@ -24,16 +24,22 @@ final class PhpCsFixer extends Checker
      */
     public static function check(array $files = [], array $parameters = null)
     {
-        // Exec PHP function is used because php-cs-fixer uses Symfony Process component inside
-        // ProcessBuilder fails when is launched from another ProcessBuilder
-        $commandLine = [
-            'php',
-            'vendor/fabpot/php-cs-fixer/php-cs-fixer',
-            'fix',
-            $parameters['phpcsfixer_path'],
-            '--level=' . $parameters['phpcsfixer_level'],
-            '--fixers=' . implode(',', $parameters['phpcsfixer_fixers'])
-        ];
-        exec(implode(' ', $commandLine));
+        foreach ($files as $file) {
+            if (false === self::exist($file, $parameters['phpcsfixer_path'], 'php')) {
+                continue;
+            }
+
+            // Exec PHP function is used because php-cs-fixer uses Symfony Process component inside
+            // ProcessBuilder fails when is launched from another ProcessBuilder
+            $commandLine = [
+                'php',
+                'vendor/fabpot/php-cs-fixer/php-cs-fixer',
+                'fix',
+                $file,
+                '--level=' . $parameters['phpcsfixer_level'],
+                '--fixers=' . implode(',', $parameters['phpcsfixer_fixers'])
+            ];
+            exec(implode(' ', $commandLine));
+        }
     }
 }

@@ -28,9 +28,15 @@ final class PhpFormatter extends Checker
      */
     public static function check(array $files = [], array $parameters = null)
     {
-        self::updateFormatterYamlFile($parameters);
-        self::fixHeaders($parameters);
-        self::sortUseStatements($parameters);
+        foreach ($files as $file) {
+            if (false === self::exist($file, $parameters['phpformatter_path'], 'php')) {
+                continue;
+            }
+
+            self::updateFormatterYamlFile($parameters);
+            self::fixHeaders($parameters);
+            self::sortUseStatements($parameters);
+        }
     }
 
     /**
