@@ -14,6 +14,7 @@ parameters:
         - phpcsfixer
         - scsslint
         - eslint
+        - twiglint
 
     name: CHANGE-FOR-YOUR-AWESOME-NAME
     type: project
@@ -59,6 +60,7 @@ parameters:
             SelectorFormat:
                 enabled: true
                 convention: hyphenated_BEM
+
     eslint_path: app/Resources/assets/js
     eslint_file_location: vendor/lin3s/cs/src
     eslint_exclude: []
@@ -69,3 +71,5 @@ parameters:
             jquery: true
         globals: []
         rules: []
+
+    twiglint_path: app/Resources/views

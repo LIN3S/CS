@@ -20,6 +20,7 @@ standards. This library is focused to PHP, Javascript and Sass projects.
 * Checks mess detections with [PHPMD][10].
 * Checks the Sass best practices with [Scss-lint][5].
 * Checks the code quality of Javascript files with [ESLint][7].
+* Checks the [Twig][12] files searching syntax errors.
 
 > This library is very focused to use as pre-commit hook so, this is the reason of [Git][11] PHP class exists. The
 checkers only check the files that they are going to commit, except PHP-CS-Fixer and PHP-Formatter. Apart of the
@@ -85,3 +86,4 @@ dynamically generated `.scss_lint.yml`, `.eslint.yml` and `.editorconfig` files,
 [9]: https://github.com/mmoreram/php-formatter
 [10]: http://phpmd.org/
 [11]: https://github.com/LIN3S/CS/blob/master/src/Git/Git.php
+[12]: http://twig.sensiolabs.org/

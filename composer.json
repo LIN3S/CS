@@ -1,7 +1,6 @@
 {
     "name": "lin3s/cs",
     "description": "The coding standards in the LIN3S way",
-    "homepage": "http://lin3s.com",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -12,6 +11,7 @@
         }
     ],
     "require": {
+        "asm89/twig-lint":                      "^1.0",
         "fabpot/php-cs-fixer":                  "^1.9",
         "incenteev/composer-parameter-handler": "^2.1",
         "mmoreram/php-formatter":               "^1.0",
@@ -23,9 +23,9 @@
         "phpspec/phpspec":                      "^2.2"
     },
     "autoload": {
-        "psr-4": { "LIN3S\\CS\\": "src" }
+        "psr-4": { "LIN3S\\CS\\": "src/" }
     },
     "autoload-dev": {
-        "psr-4": { "spec\\LIN3S\\CS\\": "spec" }
+        "psr-4": { "spec\\LIN3S\\CS\\": "spec/" }
     }
 }
