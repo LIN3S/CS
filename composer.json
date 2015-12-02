@@ -11,7 +11,6 @@
         }
     ],
     "require": {
-        "asm89/twig-lint":                      "^1.0",
         "fabpot/php-cs-fixer":                  "^1.9",
         "incenteev/composer-parameter-handler": "^2.0",
         "mmoreram/php-formatter":               "^1.0",
@@ -20,7 +19,7 @@
         "symfony/yaml":                         "^2.3|^3.0"
     },
     "require-dev": {
-        "phpspec/phpspec":                      "^2.3"
+        "phpspec/phpspec":                      "^2.4"
     },
     "autoload": {
         "psr-4": { "LIN3S\\CS\\": "src/" }
