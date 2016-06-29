@@ -11,15 +11,15 @@
         }
     ],
     "require": {
-        "fabpot/php-cs-fixer":                  "^1.9",
+        "friendsofphp/php-cs-fixer": "^1.11",
         "incenteev/composer-parameter-handler": "^2.0",
-        "mmoreram/php-formatter":               "^1.0",
-        "phpmd/phpmd":                          "^2.2",
-        "symfony/filesystem":                   "^2.3|^3.0",
-        "symfony/yaml":                         "^2.3|^3.0"
+        "mmoreram/php-formatter": "^1.0",
+        "phpmd/phpmd": "^2.2",
+        "symfony/filesystem": "^2.3 || ^3.0",
+        "symfony/yaml": "^2.3 || ^3.0"
     },
     "require-dev": {
-        "phpspec/phpspec":                      "^2.4"
+        "phpspec/phpspec": "^2.5"
     },
     "autoload": {
         "psr-4": { "LIN3S\\CS\\": "src/" }
