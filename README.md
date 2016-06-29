@@ -45,7 +45,7 @@ $ composer require lin3s/cs
 ```
 Then you have to update the `composer.json` with the following code:
 ```
-"scripts": {
+"scripts-dev": {
     "post-update-cmd": [
         "LIN3S\\CS\\Composer\\Hooks::buildDistFile",
         "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
