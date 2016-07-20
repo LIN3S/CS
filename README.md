@@ -41,7 +41,7 @@ following requirements:
 The recommended and the most suitable way to install is through [Composer][3]. Be sure that the tool is installed in
 your system and execute the following command:
 ```
-$ composer require lin3s/cs
+$ composer require lin3s/cs --dev
 ```
 Then you have to update the `composer.json` with the following code:
 ```
