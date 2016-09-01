@@ -67,8 +67,11 @@ parameters:
     eslint_rules:               # available rules can view in http://eslint.org/docs/rules/
         ecmaFeatures: []
         env:
+            es6: true
             browser: true
             jquery: true
+        parserOptions:
+            sourceType: module
         globals:
             dataLayer: true
             FastClick: true
