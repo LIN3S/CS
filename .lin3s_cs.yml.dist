@@ -65,7 +65,8 @@ parameters:
     eslint_file_location: vendor/lin3s/cs/src
     eslint_exclude: []
     eslint_rules:               # available rules can view in http://eslint.org/docs/rules/
-        ecmaFeatures: []
+        ecmaFeatures:
+            modules: true
         env:
             es6: true
             browser: true
