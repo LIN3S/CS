@@ -102,7 +102,7 @@ rules:
     no-ternary: 0
     no-trailing-spaces: 2
     no-undef: 2
-    no-undef-init: 2
+    no-undef-init: 0
     no-undefined: 0
     no-underscore-dangle: 0
     no-unreachable: 2

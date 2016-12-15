@@ -71,6 +71,60 @@ Then you have to update the `composer.json` with the following code:
 track the `.dist` file ignoring the `.lin3s_cs.yml` inside `.gitignore`. In the same way, we recommend that, also,
 dynamically generated `.scss_lint.yml`, `.eslint.yml` and `.editorconfig` files, it should be ignored.
 
+##Use ESLint in a React.js environment
+In LIN3S are building a lot of projects with React.js so, keeping in mind the simplicity of the configuration process
+the following lin3s are our requirements to standardize the JS code inside this environment.
+```yml
+# .lin3s_cs.yml
+
+parameters:
+    eslint_rules:
+        plugins:
+            - react
+            - class-property
+        ecmaFeatures:
+            modules: true
+        env:
+            es6: true
+            browser: true
+        parser: babel-eslint
+        parserOptions:
+            sourceType: module
+            ecmaFeatures:
+                classes: true
+                experimentalObjectRestSpread: true
+                jsx: true
+                templateStrings: true
+        rules:
+            react/display-name: 0
+            react/forbid-prop-types: 0
+            react/jsx-boolean-value: 0
+            react/jsx-closing-bracket-location: 0
+            react/jsx-curly-spacing: 0
+            react/jsx-indent-props: 0
+            react/jsx-max-props-per-line: 0
+            react/jsx-no-duplicate-props: 2
+            react/jsx-no-literals: 0
+            react/jsx-no-undef: 2
+            jsx-quotes: 2
+            react/jsx-sort-props: 2
+            react/jsx-uses-react: 2
+            react/jsx-uses-vars: 2
+            react/no-danger: 2
+            react/no-did-mount-set-state: 2
+            react/no-did-update-set-state: 2
+            react/no-direct-mutation-state: 2
+            react/no-set-state: 0
+            react/no-unknown-property: 2
+            react/prop-types: 0
+            react/react-in-jsx-scope: 0
+            react/require-extension: 0
+            react/self-closing-comp: 0
+            react/sort-comp: 0
+            react/sort-prop-types: 2
+            react/wrap-multilines: 0
+```
+
 ##Licensing Options
 [![License](https://poser.pugx.org/lin3s/cs/license.svg)](https://github.com/LIN3S/CS/blob/master/LICENSE)
 
