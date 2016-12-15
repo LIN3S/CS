@@ -78,6 +78,9 @@ the following lin3s are our requirements to standardize the JS code inside this 
 # .lin3s_cs.yml
 
 parameters:
+
+    (...)
+
     eslint_rules:
         plugins:
             - react
