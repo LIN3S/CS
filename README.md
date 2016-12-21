@@ -74,6 +74,14 @@ dynamically generated `.scss_lint.yml`, `.eslint.yml` and `.editorconfig` files,
 ##Use ESLint in a React.js environment
 In LIN3S are building a lot of projects with React.js so, keeping in mind the simplicity of the configuration process
 the following lin3s are our requirements to standardize the JS code inside this environment.
+
+But first, you need to install the following dependencies globally:
+```bash
+$ npm install -g babel-eslint
+$ npm install -g eslint-plugin-class-property
+$ npm install -g eslint-plugin-react
+```
+
 ```yml
 # .lin3s_cs.yml
 
