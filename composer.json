@@ -14,7 +14,7 @@
         "php": "^5.5 || ^7.0",
         "friendsofphp/php-cs-fixer": "^1.11",
         "incenteev/composer-parameter-handler": "^2.0",
-        "mmoreram/php-formatter": "^1.0",
+        "mmoreram/php-formatter": "~1.1.0",
         "neronmoon/scriptsdev": "^0.1.0",
         "phpmd/phpmd": "^2.2",
         "symfony/filesystem": "^2.3 || ^3.0",
