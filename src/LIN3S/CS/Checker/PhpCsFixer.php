@@ -30,7 +30,7 @@ final class PhpCsFixer implements Checker
                 continue;
             }
 
-            if (strpos($file, 'Spec') !== false) {
+            if (mb_strpos($file, 'Spec') !== false) {
                 self::execute($file, $parameters, '.phpspec_cs');
                 continue;
             }
@@ -86,6 +86,16 @@ final class PhpCsFixer implements Checker
         $file = str_replace(
             '$$CHANGE-FOR-TYPE$$',
             $parameters['type'],
+            $file
+        );
+        $file = str_replace(
+            '$$CHANGE-FOR-PHPCSFIXER-PATH$$',
+            '/' . $parameters['phpcsfixer_path'],
+            $file
+        );
+        $file = str_replace(
+            '$$CHANGE-FOR-PHPCSFIXER-TEST-PATH$$',
+            '/' . $parameters['phpcsfixer_test_path'],
             $file
         );
 

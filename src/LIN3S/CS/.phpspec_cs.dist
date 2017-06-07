@@ -14,7 +14,7 @@ declare(strict_types=1);
 use LIN3S\PhpCsFixerConfig\Lin3sConfig;
 
 $config = new Lin3sConfig('$$CHANGE-FOR-YOUR-AWESOME-NAME CHANGE-FOR-TYPE$$', '$$CHANGE-FOR-YEAR$$', '$$CHANGE-FOR-TYPE$$', true);
-$config->getFinder()->in(__DIR__)->exclude(__DIR__ . '/vendor')->name('*Spec.php');
+$config->getFinder()->in(__DIR__ . '$$CHANGE-FOR-PHPCSFIXER-TEST-PATH$$')->name('*Spec.php');
 
 $cacheDir = getenv('TRAVIS') ? getenv('HOME') . '/.php-cs-fixer' : __DIR__;
 
