@@ -12,18 +12,10 @@
 namespace LIN3S\CS\Exception;
 
 /**
- * Check fail exception custom exception.
- *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
 class CheckFailException extends \Exception
 {
-    /**
-     * Constructor.
-     *
-     * @param string $checkName The executed check name
-     * @param string $message   The extra message
-     */
     public function __construct($checkName, $message = '')
     {
         parent::__construct(sprintf('Check fails during the %s. %s', $checkName, $message));

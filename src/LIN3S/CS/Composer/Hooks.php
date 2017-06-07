@@ -70,12 +70,12 @@ final class Hooks
         }
     }
 
-    private function rootDir()
+    private static function rootDir()
     {
         return __DIR__ . '/../../../../../../..';
     }
 
-    private function lin3sCsRootDir()
+    private static function lin3sCsRootDir()
     {
         return __DIR__ . '/../..';
     }

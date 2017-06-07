@@ -24,47 +24,15 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * Endpoint of LIN3S CS, this is the index of application.
- *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
-class Application extends BaseApplication
+final class Application extends BaseApplication
 {
-    /**
-     * The input.
-     *
-     * @var \Symfony\Component\Console\Input\InputInterface
-     */
-    protected $input;
+    private $input;
+    private $name;
+    private $output;
+    private $parameters;
 
-    /**
-     * The name of application.
-     *
-     * @var string
-     */
-    protected $name;
-
-    /**
-     * The output.
-     *
-     * @var \Symfony\Component\Console\Output\OutputInterface
-     */
-    protected $output;
-
-    /**
-     * Array which contains the different parameters defined inside the .lin3s_cs.yml
-     *
-     * @var array
-     */
-    protected $parameters;
-
-    /**
-     * Constructor.
-     *
-     * @param string|null $name          The name
-     * @param string|null $version       The version
-     * @param string|null $rootDirectory The root directory
-     */
     public function __construct($name = null, $version = null, $rootDirectory = null)
     {
         if (null === $this->name = $name) {
@@ -80,9 +48,6 @@ class Application extends BaseApplication
         $this->parameters['root_directory'] = $rootDirectory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function doRun(InputInterface $input, OutputInterface $output)
     {
         $this->input = $input;
@@ -137,11 +102,6 @@ class Application extends BaseApplication
         $output->writeln('<info>Nice commit man!</info>');
     }
 
-    /**
-     * Gets the parameters array.
-     *
-     * @return array
-     */
     public function parameters()
     {
         return $this->parameters;
