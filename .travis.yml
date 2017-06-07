@@ -7,19 +7,34 @@
 #
 # @author Beñat Espiña <benatespina@gmail.com>
 
+sudo: false
+
 language: php
 
 php:
-    - 5.6
-    - 7.0
+    - 7.1
 
-before_script:
+env:
+    - COMPOSER_OPTIONS="--no-interaction --prefer-source"
+
+before_install:
+    - phpenv config-rm xdebug.ini
     - composer self-update
-    - composer install --prefer-source
+
+install:
+    - composer install
 
 script:
-    - vendor/bin/phpspec run -fpretty
+    - vendor/bin/phpspec run
+    - vendor/bin/php-cs-fixer fix --config=.php_cs --diff --dry-run -v
+    - vendor/bin/php-cs-fixer fix --config=.phpspec_cs --diff --dry-run -v
 
 cache:
     directories:
-        - $COMPOSER_CACHE_DIR
+        - $HOME/.composer/cache/files
+        - $HOME/.php-cs-fixer
+
+matrix:
+    fast_finish: true
+    include:
+        php: 7.1

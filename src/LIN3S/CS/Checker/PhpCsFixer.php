@@ -57,7 +57,7 @@ final class PhpCsFixer implements Checker
 
     private static function configFile($fileName, array $parameters)
     {
-        $file = file_get_contents(__DIR__ . '/src/' . $fileName . '.dist');
+        $file = file_get_contents(__DIR__ . '/../' . $fileName . '.dist');
 
         $file = str_replace(
             '$$CHANGE-FOR-YOUR-AWESOME-NAME CHANGE-FOR-TYPE$$',
