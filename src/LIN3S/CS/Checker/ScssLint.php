@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace LIN3S\CS\Checker;
 
 use LIN3S\CS\Error\Error;
@@ -35,7 +37,7 @@ final class ScssLint implements Checker
 
         $errors = [];
         foreach ($files as $file) {
-            if (false === self::exist($file, $parameters['scsslint_path'], 'scss') || in_array($file, $excludes)) {
+            if (false === self::exist($file, $parameters['scsslint_path'], 'scss') || in_array($file, $excludes, true)) {
                 continue;
             }
 

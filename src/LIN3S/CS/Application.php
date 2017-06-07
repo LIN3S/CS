@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace LIN3S\CS;
 
 use LIN3S\CS\Checker\Composer;
@@ -60,12 +62,12 @@ final class Application extends BaseApplication
         $output->writeln('<info>Check composer</info>');
         Composer::check($files);
 
-        if (in_array('phpcsfixer', $this->parameters['enabled'])) {
+        if (in_array('phpcsfixer', $this->parameters['enabled'], true)) {
             $output->writeln('<info>Fixing PHP code style with PHP-CS-Fixer</info>');
             PhpCsFixer::check($files, $this->parameters);
         }
 
-        if (in_array('phpmd', $this->parameters['enabled'])) {
+        if (in_array('phpmd', $this->parameters['enabled'], true)) {
             $output->writeln('<info>Checking code mess with PHPMD</info>');
             $phpmdResult = Phpmd::check($files, $this->parameters);
             if (count($phpmdResult) > 0) {
@@ -76,7 +78,7 @@ final class Application extends BaseApplication
             }
         }
 
-        if (in_array('scsslint', $this->parameters['enabled'])) {
+        if (in_array('scsslint', $this->parameters['enabled'], true)) {
             $output->writeln('<info>Checking scss files with Scss-lint</info>');
             $scssLintResult = ScssLint::check($files, $this->parameters);
             if (count($scssLintResult) > 0) {
@@ -87,7 +89,7 @@ final class Application extends BaseApplication
             }
         }
 
-        if (in_array('eslint', $this->parameters['enabled'])) {
+        if (in_array('eslint', $this->parameters['enabled'], true)) {
             $output->writeln('<info>Checking js files with ESLint</info>');
             $esLintResult = EsLint::check($files, $this->parameters);
             if (count($esLintResult) > 0) {

@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 use LIN3S\PhpCsFixerConfig\Lin3sConfig;
 
-$config = new Lin3sConfig('$$CHANGE-FOR-YOUR-AWESOME-NAME CHANGE-FOR-TYPE$$', '$$CHANGE-FOR-YEAR$$', '$$CHANGE-FOR-TYPE$$', true);
-$config->getFinder()->in(__DIR__ . '/spec')->name('*Spec.php');
+$config = new Lin3sConfig('CS', '2015', 'library');
+$config->getFinder()->in(__DIR__ . '/src');
 
 $cacheDir = getenv('TRAVIS') ? getenv('HOME') . '/.php-cs-fixer' : __DIR__;
 

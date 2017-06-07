@@ -9,44 +9,19 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace LIN3S\CS\Error;
 
 /**
- * Error class that encapsulates all checkers'
- * errors in manage friendly domain object.
- *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
 class Error
 {
-    /**
-     * The file name.
-     *
-     * @var string
-     */
-    protected $file;
+    private $file;
+    private $error;
+    private $output;
 
-    /**
-     * The error string.
-     *
-     * @var string
-     */
-    protected $error;
-
-    /**
-     * The output.
-     *
-     * @var string
-     */
-    protected $output;
-
-    /**
-     * Constructor.
-     *
-     * @param string $file   The file name
-     * @param string $error  The error string
-     * @param string $output The output
-     */
     public function __construct($file, $error, $output)
     {
         $this->file = $file;
@@ -54,31 +29,16 @@ class Error
         $this->output = $output;
     }
 
-    /**
-     * Gets the file name.
-     *
-     * @return string
-     */
     public function file()
     {
         return $this->file;
     }
 
-    /**
-     * Gets the error string.
-     *
-     * @return string
-     */
     public function error()
     {
         return $this->error;
     }
 
-    /**
-     * Gets the output.
-     *
-     * @return string
-     */
     public function output()
     {
         return $this->output;

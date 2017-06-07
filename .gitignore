@@ -7,6 +7,7 @@
 #
 # @author Beñat Espiña <benatespina@gmail.com>
 
+/.php_cs.cache
 /composer.lock
 /src/LIN3S/CS/.formatter.yml
 /src/LIN3S/CS/.scss_lint.yml

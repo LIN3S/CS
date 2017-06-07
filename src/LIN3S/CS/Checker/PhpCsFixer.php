@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace LIN3S\CS\Checker;
 
 /**
@@ -67,6 +69,11 @@ final class PhpCsFixer implements Checker
         $file = str_replace(
             '$$CHANGE-FOR-YEAR$$',
             $parameters['year'],
+            $file
+        );
+        $file = str_replace(
+            '$$CHANGE-FOR-TYPE$$',
+            $parameters['type'],
             $file
         );
 
