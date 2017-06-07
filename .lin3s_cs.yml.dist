@@ -10,14 +10,13 @@
 parameters:
     enabled:
         - phpmd
-        - phpformatter
         - phpcsfixer
         - scsslint
         - eslint
 
     name: CHANGE-FOR-YOUR-AWESOME-NAME
     type: project
-    year: 2016
+    year: 2017
     author: LIN3S
     email: info@lin3s.com
     version: 0.1
@@ -28,8 +27,6 @@ parameters:
         - unusedcode
         - codesize
         - naming
-
-    phpformatter_path: src
 
     phpcsfixer_path: src
     phpcsfixer_file_location: vendor/lin3s/cs/src/LIN3S/CS/
