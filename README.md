@@ -14,9 +14,8 @@ This package is created to centralize all the checks style of LIN3S projects, in
 and improving the maintainability. It is a flexible and customizable solution to automatize all related with coding
 standards. This library is focused to PHP, Javascript and Sass projects.
 
-* Checks if [Composer][3] json has changes, the lock must be commited too.
+* Checks if [Composer][3] json has changes, the lock must be committed too.
 * Fixes the PHP code with fully customizable [PHP-CS-Fixer][8].
-* Shorts the use statements and added a proper header inside PHP files with [PHP-Formatter][9].
 * Checks mess detections with [PHPMD][10].
 * Checks the Sass best practices with [Scss-lint][5].
 * Checks the code quality of Javascript files with [ESLint][7].
@@ -149,6 +148,5 @@ parameters:
 [6]: https://nodejs.org/download/
 [7]: http://eslint.org/
 [8]: http://cs.sensiolabs.org/
-[9]: https://github.com/mmoreram/php-formatter
 [10]: http://phpmd.org/
 [11]: https://github.com/LIN3S/CS/blob/master/src/Git/Git.php
