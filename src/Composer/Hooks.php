@@ -13,6 +13,7 @@ namespace LIN3S\CS\Composer;
 
 use LIN3S\CS\Application;
 use LIN3S\CS\Checker\EsLint;
+use LIN3S\CS\Checker\PhpCsFixer;
 use LIN3S\CS\Checker\ScssLint;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -71,6 +72,7 @@ final class Hooks
         $app = new Application();
         ScssLint::scssLintFile($app->parameters());
         EsLint::esLintFile($app->parameters());
+        PhpCsFixer::files($app->parameters());
 
         $editorConfig = __DIR__ . '/../../../../../.editorconfig';
         $fileSystem = new Filesystem();
