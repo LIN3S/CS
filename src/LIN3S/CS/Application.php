@@ -43,7 +43,7 @@ final class Application extends BaseApplication
         }
         parent::__construct($name, $version);
 
-        $rootDirectory = $rootDirectory ?: realpath(__DIR__ . '/../../../../../Users/');
+        $rootDirectory = $rootDirectory ?: realpath(__DIR__ . '/../../../../../../');
         $this->parameters = Yaml::parse(file_get_contents($rootDirectory . '/.lin3s_cs.yml'))['parameters'];
         $this->parameters['root_directory'] = $rootDirectory;
     }
