@@ -18,20 +18,13 @@ use LIN3S\CS\Checker\ScssLint;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
- * Composer scripts that connect your application
- * with LIN3S CS in an easy way.
- *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
 final class Hooks
 {
-    /**
-     * Static method that allows to create a hooks symlink
-     * when Composer throws the install or update commands.
-     */
     public static function addHooks()
     {
-        $hooksDirectory = __DIR__ . '/../../../../../.git/hooks';
+        $hooksDirectory = self::rootDir() . '/.git/hooks';
         $fileSystem = new Filesystem();
 
         try {
@@ -44,44 +37,46 @@ final class Hooks
         }
     }
 
-    /**
-     * Static method that creates .lin3s_cs.yml.dist if it does not exist.
-     */
     public static function buildDistFile()
     {
-        $distFile = __DIR__ . '/../../../../../.lin3s_cs.yml.dist';
+        $distFile = self::rootDir() . '/.lin3s_cs.yml.dist';
         $fileSystem = new Filesystem();
 
         try {
             if ($fileSystem->exists($distFile)) {
                 return;
             }
-            $fileSystem->copy(__DIR__ . '/../../.lin3s_cs.yml.dist', $distFile);
+            $fileSystem->copy(self::lin3sCsRootDir() . '/.lin3s_cs.yml.dist', $distFile);
         } catch (\Exception $exception) {
             echo sprintf("Something wrong happens during the touch process: \n%s\n", $exception->getMessage());
         }
     }
 
-    /**
-     * Static method that allows to create a .editorconfig symlink,
-     * .scss_lint.yml and .eslint.yml files when Composer throws the
-     * install or update commands.
-     */
     public static function addFiles()
     {
         $app = new Application();
-        ScssLint::scssLintFile($app->parameters());
-        EsLint::esLintFile($app->parameters());
-        PhpCsFixer::files($app->parameters());
+        ScssLint::file($app->parameters());
+        EsLint::file($app->parameters());
+        PhpCsFixer::file($app->parameters());
 
-        $editorConfig = __DIR__ . '/../../../../../.editorconfig';
+        $editorConfig = self::rootDir() . '/.editorconfig';
         $fileSystem = new Filesystem();
 
         try {
             $fileSystem->remove($editorConfig);
-            $fileSystem->symlink(__DIR__ . '/../../.editorconfig', $editorConfig, true);
+            $fileSystem->symlink(self::lin3sCsRootDir() . '/.editorconfig', $editorConfig, true);
         } catch (\Exception $exception) {
             echo sprintf("Something wrong happens during the symlink process: \n%s\n", $exception->getMessage());
         }
+    }
+
+    private function rootDir()
+    {
+        return __DIR__ . '/../../../../../../..';
+    }
+
+    private function lin3sCsRootDir()
+    {
+        return __DIR__ . '/../..';
     }
 }

@@ -12,25 +12,23 @@
 namespace LIN3S\CS\Checker;
 
 use LIN3S\CS\Error\Error;
-use LIN3S\CS\Exception\ToolUnavailableException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * Checker that automatizes all the logic about ESLint.
- *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
-final class EsLint extends Checker
+final class EsLint implements Checker
 {
-    /**
-     * {@inheritdoc}
-     */
+    use FileFinder;
+    use ToolAvailability;
+
     public static function check(array $files = [], array $parameters = null)
     {
-        static::isAvailable('eslint');
-        static::esLintFile($parameters);
+        self::isAvailable('eslint');
+        self::file($parameters);
+
         $excludes = [];
         if (true === array_key_exists('eslint_exclude', $parameters)) {
             foreach ($parameters['eslint_exclude'] as $key => $exclude) {
@@ -45,7 +43,7 @@ final class EsLint extends Checker
             }
 
             $process = new Process(
-                sprintf('eslint %s -c %s/.eslint.yml', $file, static::location($parameters)),
+                sprintf('eslint %s -c %s/.eslint.yml', $file, self::location($parameters)),
                 $parameters['root_directory']
             );
             $process->run();
@@ -61,20 +59,12 @@ final class EsLint extends Checker
         return $errors;
     }
 
-    /**
-     * Static method that allows to create a .eslint.yml file.
-     *
-     * @param array $parameters Array which contains the different parameters
-     *
-     * @internal param string $location The location path of .scss_lint.yml
-     * @internal param string $content The content of file
-     */
-    public static function esLintFile($parameters)
+    public static function file($parameters)
     {
         $yaml = array_replace_recursive(
             Yaml::parse(file_get_contents(__DIR__ . '/../.eslint.yml.dist')), $parameters['eslint_rules']
         );
-        $location = static::location($parameters) . '/.eslint.yml';
+        $location = self::location($parameters) . '/.eslint.yml';
         $fileSystem = new Filesystem();
 
         try {
@@ -86,28 +76,8 @@ final class EsLint extends Checker
         }
     }
 
-    /**
-     * Gets the location path of .eslint.yml.
-     *
-     * @param array $parameters Array which contains the different parameters
-     *
-     * @return string
-     */
     private static function location($parameters)
     {
         return $parameters['root_directory'] . '/' . $parameters['eslint_file_location'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected static function isAvailable($tool)
-    {
-        $process = new Process(sprintf('%s -v', $tool));
-        $process->run();
-
-        if (!$process->isSuccessful()) {
-            throw new ToolUnavailableException($tool);
-        }
     }
 }

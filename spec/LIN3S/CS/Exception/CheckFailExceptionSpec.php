@@ -12,9 +12,6 @@
 namespace spec\LIN3S\CS\Exception;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Symfony\Component\Process\Exception\ProcessFailedException;
-use Symfony\Component\Process\Process;
 
 /**
  * Spec file of CheckFail exception class.

@@ -15,8 +15,10 @@ namespace LIN3S\CS\Checker;
  * @author Beñat Espiña <benatespina@gmail.com>
  * @author Jon Torrado <jontorrado@gmail.com>
  */
-final class PhpCsFixer extends Checker
+final class PhpCsFixer implements Checker
 {
+    use FileFinder;
+
     public static function check(array $files = [], array $parameters = null)
     {
         foreach ($files as $file) {
@@ -37,7 +39,7 @@ final class PhpCsFixer extends Checker
         }
     }
 
-    public static function files(array $parameters)
+    public static function file(array $parameters)
     {
         self::phpCsConfigFile($parameters);
         self::phpspecCsConfigFile($parameters);
@@ -55,7 +57,7 @@ final class PhpCsFixer extends Checker
 
     private static function configFile($fileName, array $parameters)
     {
-        $file = file_get_contents(__DIR__ . '/../' . $fileName . '.dist');
+        $file = file_get_contents(__DIR__ . '/src/' . $fileName . '.dist');
 
         $file = str_replace(
             '$$CHANGE-FOR-YOUR-AWESOME-NAME CHANGE-FOR-TYPE$$',
@@ -75,7 +77,7 @@ final class PhpCsFixer extends Checker
         }
     }
 
-    private static function location($parameters)
+    private static function location(array $parameters)
     {
         return $parameters['root_directory'] . '/' . $parameters['phpcsfixer_file_location'];
     }

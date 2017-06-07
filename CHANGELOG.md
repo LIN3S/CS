@@ -7,3 +7,4 @@ To get the diff between two versions, go to https://github.com/LIN3S/CS/compare/
 
 * 0.5.0
     * Upgraded the PHPCsFixer to v2.
+    * Moved all the project to the according folder structure.

@@ -7,8 +7,8 @@
 #
 # @author Beñat Espiña <benatespina@gmail.com>
 
-composer.lock
-src/.formatter.yml
-src/.scss_lint.yml
-src/.eslint.yml
-vendor
+/composer.lock
+/src/LIN3S/CS/.formatter.yml
+/src/LIN3S/CS/.scss_lint.yml
+/src/LIN3S/CS/.eslint.yml
+/vendor

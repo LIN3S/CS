@@ -14,7 +14,6 @@ namespace LIN3S\CS;
 use LIN3S\CS\Checker\Composer;
 use LIN3S\CS\Checker\EsLint;
 use LIN3S\CS\Checker\PhpCsFixer;
-use LIN3S\CS\Checker\PhpFormatter;
 use LIN3S\CS\Checker\Phpmd;
 use LIN3S\CS\Checker\ScssLint;
 use LIN3S\CS\Exception\CheckFailException;
@@ -76,7 +75,7 @@ class Application extends BaseApplication
         }
         parent::__construct($name, $version);
 
-        $rootDirectory = $rootDirectory ?: realpath(__DIR__ . '/../../../../');
+        $rootDirectory = $rootDirectory ?: realpath(__DIR__ . '/../../../../../Users/');
         $this->parameters = Yaml::parse(file_get_contents($rootDirectory . '/.lin3s_cs.yml'))['parameters'];
         $this->parameters['root_directory'] = $rootDirectory;
     }
@@ -95,11 +94,6 @@ class Application extends BaseApplication
 
         $output->writeln('<info>Check composer</info>');
         Composer::check($files);
-
-        if (in_array('phpformatter', $this->parameters['enabled'])) {
-            $output->writeln('<info>Checking uses and license headers with PHP-formatter</info>');
-            PHPFormatter::check($files, $this->parameters);
-        }
 
         if (in_array('phpcsfixer', $this->parameters['enabled'])) {
             $output->writeln('<info>Fixing PHP code style with PHP-CS-Fixer</info>');

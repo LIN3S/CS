@@ -14,16 +14,10 @@ namespace LIN3S\CS\Checker;
 use LIN3S\CS\Exception\CheckFailException;
 
 /**
- * Checker that controls if the Composer's json file
- * has changes, also the lock file must be committed.
- *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
-final class Composer extends Checker
+final class Composer implements Checker
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function check(array $files = [], array $parameters = null)
     {
         $composerJsonDetected = false;

@@ -15,15 +15,12 @@ use LIN3S\CS\Error\Error;
 use Symfony\Component\Process\ProcessBuilder;
 
 /**
- * Checker that automatizes all the logic about PHP Mess Detector.
- *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
-final class Phpmd extends Checker
+final class Phpmd implements Checker
 {
-    /**
-     * {@inheritdoc}
-     */
+    use FileFinder;
+
     public static function check(array $files = [], array $parameters = null)
     {
         $errors = [];
@@ -33,7 +30,7 @@ final class Phpmd extends Checker
             }
 
             $processBuilder = new ProcessBuilder([
-                'php', 'vendor/phpmd/phpmd/src/bin/phpmd', $file, 'text', implode(',', $parameters['phpmd_rules'])
+                'php', 'vendor/phpmd/phpmd/src/bin/phpmd', $file, 'text', implode(',', $parameters['phpmd_rules']),
             ]);
             $processBuilder->setWorkingDirectory($parameters['root_directory']);
             $process = $processBuilder->getProcess();

@@ -12,25 +12,22 @@
 namespace LIN3S\CS\Checker;
 
 use LIN3S\CS\Error\Error;
-use LIN3S\CS\Exception\ToolUnavailableException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * Checker that automatizes all the logic about Scss Lint.
- *
  * @author Beñat Espiña <benatespina@gmail.com>
  */
-final class ScssLint extends Checker
+final class ScssLint implements Checker
 {
-    /**
-     * {@inheritdoc}
-     */
+    use FileFinder;
+    use ToolAvailability;
+
     public static function check(array $files = [], array $parameters = null)
     {
-        static::isAvailable('scss-lint');
-        static::scssLintFile($parameters);
+        self::isAvailable('scss-lint');
+        self::file($parameters);
         $excludes = [];
         foreach ($parameters['scsslint_exclude'] as $key => $exclude) {
             $excludes[$key] = $parameters['scsslint_path'] . '/' . $exclude;
@@ -43,7 +40,7 @@ final class ScssLint extends Checker
             }
 
             $process = new Process(
-                sprintf('scss-lint %s -c %s/.scss_lint.yml', $file, static::location($parameters)),
+                sprintf('scss-lint %s -c %s/.scss_lint.yml', $file, self::location($parameters)),
                 $parameters['root_directory']
             );
             $process->run();
@@ -59,20 +56,12 @@ final class ScssLint extends Checker
         return $errors;
     }
 
-    /**
-     * Static method that allows to create a .scss_lint.yml file.
-     *
-     * @param array $parameters Array which contains the different parameters
-     *
-     * @internal param string $location The location path of .scss_lint.yml
-     * @internal param string $content The content of file
-     */
-    public static function scssLintFile($parameters)
+    public static function file($parameters)
     {
         $yaml = array_replace_recursive(
             Yaml::parse(file_get_contents(__DIR__ . '/../.scss_lint.yml.dist')), $parameters['scsslint_rules']
         );
-        $location = static::location($parameters) . '/.scss_lint.yml';
+        $location = self::location($parameters) . '/.scss_lint.yml';
         $fileSystem = new Filesystem();
 
         try {
@@ -84,26 +73,6 @@ final class ScssLint extends Checker
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected static function isAvailable($tool)
-    {
-        $process = new Process(sprintf('%s -v', $tool));
-        $process->run();
-
-        if (!$process->isSuccessful()) {
-            throw new ToolUnavailableException($tool);
-        }
-    }
-
-    /**
-     * Gets the location path of .scss_lint.yml.
-     *
-     * @param array $parameters Array which contains the different parameters
-     *
-     * @return string
-     */
     private static function location($parameters)
     {
         return $parameters['root_directory'] . '/' . $parameters['scsslint_file_location'];
