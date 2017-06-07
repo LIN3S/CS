@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 use LIN3S\PhpCsFixerConfig\Lin3sConfig;
 
-$config = new Lin3sConfig(CHANGE-FOR-YOUR-AWESOME-NAME CHANGE-FOR-TYPE, CHANGE-FOR-YEAR);
+$config = new Lin3sConfig('$$CHANGE-FOR-YOUR-AWESOME-NAME CHANGE-FOR-TYPE$$', '$$CHANGE-FOR-YEAR$$')
 $config->getFinder()
     ->in(__DIR__ . '/spec')
     ->name('*Spec.php');
