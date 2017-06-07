@@ -21,7 +21,7 @@ use Symfony\Component\Process\Process;
  */
 trait ToolAvailability
 {
-    public function isAvailable($tool)
+    protected static function isAvailable($tool)
     {
         $process = new Process(sprintf('%s -v', $tool));
         $process->run();

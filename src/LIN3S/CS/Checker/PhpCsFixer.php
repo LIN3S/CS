@@ -24,20 +24,18 @@ final class PhpCsFixer implements Checker
     public static function check(array $files = [], array $parameters = null)
     {
         foreach ($files as $file) {
-            if (false === self::exist($file, $parameters['phpcsfixer_path'], 'php')) {
+            if (false === self::exist($file, $parameters['phpcsfixer_path'], 'php')
+                && false === self::exist($file, $parameters['phpcsfixer_test_path'], 'php')
+            ) {
                 continue;
             }
 
-            // Exec PHP function is used because php-cs-fixer uses Symfony Process component inside
-            // ProcessBuilder fails when is launched from another ProcessBuilder
-            $commandLine = [
-                'php',
-                'vendor/friendsofphp/php-cs-fixer/php-cs-fixer',
-                'fix',
-                $file,
-                '--config=.php_cs',
-            ];
-            exec(implode(' ', $commandLine));
+            if (strpos($file, 'Spec') !== false) {
+                self::execute($file, $parameters, '.phpspec_cs');
+                continue;
+            }
+
+            self::execute($file, $parameters);
         }
     }
 
@@ -45,6 +43,20 @@ final class PhpCsFixer implements Checker
     {
         self::phpCsConfigFile($parameters);
         self::phpspecCsConfigFile($parameters);
+    }
+
+    private static function execute($file, array $parameters, $checkFile = '.php_cs')
+    {
+        // Exec PHP function is used because php-cs-fixer uses Symfony Process component inside
+        // ProcessBuilder fails when is launched from another ProcessBuilder
+        $commandLine = [
+            'php',
+            'vendor/friendsofphp/php-cs-fixer/php-cs-fixer',
+            'fix',
+            $file,
+            '--config=' . self::location($parameters) . '/' . $checkFile,
+        ];
+        exec(implode(' ', $commandLine));
     }
 
     private static function phpCsConfigFile(array $parameters)
