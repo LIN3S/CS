@@ -42,7 +42,7 @@ final class ScssLint implements Checker
             }
 
             $process = new Process(
-                sprintf('scss-lint %s -c %s/.scss_lint.yml', $file, self::location($parameters)),
+                sprintf('scss-lint %s -c %s/.scss-lint.yml', $file, self::location($parameters)),
                 $parameters['root_directory']
             );
             $process->run();
@@ -61,9 +61,9 @@ final class ScssLint implements Checker
     public static function file($parameters)
     {
         $yaml = array_replace_recursive(
-            Yaml::parse(file_get_contents(__DIR__ . '/../.scss_lint.yml.dist')), $parameters['scsslint_rules']
+            Yaml::parse(file_get_contents(__DIR__ . '/../.scss-lint.yml.dist')), $parameters['scsslint_rules']
         );
-        $location = self::location($parameters) . '/.scss_lint.yml';
+        $location = self::location($parameters) . '/.scss-lint.yml';
         $fileSystem = new Filesystem();
 
         try {

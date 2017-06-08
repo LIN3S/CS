@@ -9,7 +9,6 @@
 
 /.php_cs.cache
 /composer.lock
-/src/LIN3S/CS/.formatter.yml
-/src/LIN3S/CS/.scss_lint.yml
+/src/LIN3S/CS/.scss-lint.yml
 /src/LIN3S/CS/.eslint.yml
 /vendor
