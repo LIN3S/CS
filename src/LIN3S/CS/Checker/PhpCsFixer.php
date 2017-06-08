@@ -55,6 +55,7 @@ final class PhpCsFixer implements Checker
             'fix',
             $file,
             '--config=' . self::location($parameters) . '/' . $checkFile,
+            '2> /dev/null',
         ];
         exec(implode(' ', $commandLine));
     }
