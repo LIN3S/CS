@@ -33,7 +33,7 @@ following requirements:
 2. [Ruby][4]
   * [Scss-lint][5]: `gem install scss_lint`
 3. [Node.js][6]
-  * [Eslint][7]: `npm install -g eslint`
+  * [Eslint][7]: `npm install -g eslint eslint-plugin-class-property eslint-plugin-react babel-eslint`
 
 
 ## Getting started
@@ -76,65 +76,45 @@ dynamically generated `.scss-lint.yml`, `.eslint.yml` and `.editorconfig` files,
 In LIN3S are building a lot of projects with React.js so, keeping in mind the simplicity of the configuration process
 the following lin3s are our requirements to standardize the JS code inside this environment.
 
-But first, you need to install the following dependencies globally:
-```bash
-$ npm install -g babel-eslint
-$ npm install -g eslint-plugin-class-property
-$ npm install -g eslint-plugin-react
-```
-
 ```yml
 # .lin3s_cs.yml
 
 parameters:
 
-    (...)
+    # ...
 
     eslint_rules:
         plugins:
+            # ...
             - react
-            - class-property
-        ecmaFeatures:
-            modules: true
-        env:
-            es6: true
-            browser: true
-        parser: babel-eslint
-        parserOptions:
-            sourceType: module
-            ecmaFeatures:
-                classes: true
-                experimentalObjectRestSpread: true
-                jsx: true
-                templateStrings: true
         rules:
-            react/display-name: 0
-            react/forbid-prop-types: 0
-            react/jsx-boolean-value: 0
-            react/jsx-closing-bracket-location: 0
-            react/jsx-curly-spacing: 0
-            react/jsx-indent-props: 0
-            react/jsx-max-props-per-line: 0
-            react/jsx-no-duplicate-props: 2
-            react/jsx-no-literals: 0
-            react/jsx-no-undef: 2
-            jsx-quotes: 2
-            react/jsx-sort-props: 2
-            react/jsx-uses-react: 2
-            react/jsx-uses-vars: 2
-            react/no-danger: 2
-            react/no-did-mount-set-state: 2
-            react/no-did-update-set-state: 2
-            react/no-direct-mutation-state: 2
-            react/no-set-state: 0
-            react/no-unknown-property: 2
-            react/prop-types: 0
-            react/react-in-jsx-scope: 0
-            react/require-extension: 0
-            react/self-closing-comp: 0
-            react/sort-comp: 0
-            react/sort-prop-types: 2
-            react/wrap-multilines: 0
+            react/display-name: off
+            react/forbid-prop-types: off
+            react/jsx-boolean-value: off
+            react/jsx-closing-bracket-location: off
+            react/jsx-curly-spacing: off
+            react/jsx-indent-props: off
+            react/jsx-max-props-per-line: off
+            react/jsx-no-duplicate-props: error
+            react/jsx-no-literals: off
+            react/jsx-no-undef: error
+            jsx-quotes: error
+            react/jsx-sort-props: error
+            react/jsx-uses-react: error
+            react/jsx-uses-vars: error
+            react/no-danger: error
+            react/no-did-mount-set-state: error
+            react/no-did-update-set-state: error
+            react/no-direct-mutation-state: error
+            react/no-set-state: off
+            react/no-unknown-property: error
+            react/prop-types: off
+            react/react-in-jsx-scope: off
+            react/require-extension: off
+            react/self-closing-comp: off
+            react/sort-comp: off
+            react/sort-prop-types: error
+            react/wrap-multilines: off
 ```
 
 ## Licensing Options

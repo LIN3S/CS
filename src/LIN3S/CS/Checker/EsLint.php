@@ -16,7 +16,6 @@ namespace LIN3S\CS\Checker;
 use LIN3S\CS\Error\Error;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
-use Symfony\Component\Yaml\Yaml;
 
 /**
  * @author Beñat Espiña <benatespina@gmail.com>
@@ -45,7 +44,7 @@ final class EsLint implements Checker
             }
 
             $process = new Process(
-                sprintf('eslint %s -c %s/.eslint.yml', $file, self::location($parameters)),
+                sprintf('eslint %s -c %s/.eslintrc.js', $file, self::location($parameters)),
                 $parameters['root_directory']
             );
             $process->run();
@@ -63,19 +62,60 @@ final class EsLint implements Checker
 
     public static function file($parameters)
     {
-        $yaml = array_replace_recursive(
-            Yaml::parse(file_get_contents(__DIR__ . '/../.eslint.yml.dist')), $parameters['eslint_rules']
-        );
-        $location = self::location($parameters) . '/.eslint.yml';
+        $jsContent = file_get_contents(__DIR__ . '/../.eslintrc.js.dist');
+
+        $arrayContent = self::extractContent($jsContent);
+        foreach ($parameters['eslint_rules'] as $ruleType => $rules) {
+            if (!is_array($rules)) {
+                $arrayContent[$ruleType] = $rules;
+                continue;
+            }
+
+            if (self::isAssociativeArray($rules)) {
+                foreach ($rules as $name => $rule) {
+                    $arrayContent[$ruleType][$name] = $rule;
+                }
+                continue;
+            }
+
+            foreach ($rules as $rule) {
+                if (in_array($rule, $arrayContent[$ruleType], true)) {
+                    continue;
+                }
+                $arrayContent[$ruleType][] = $rule;
+            }
+        }
+
+        $location = self::location($parameters) . '/.eslintrc.js';
         $fileSystem = new Filesystem();
 
         try {
             $fileSystem->remove($location);
             $fileSystem->touch($location);
-            file_put_contents($location, Yaml::dump($yaml));
+            file_put_contents($location, self::buildEslintJsFile($arrayContent));
         } catch (\Exception $exception) {
             echo sprintf("Something wrong happens during the creating process: \n%s\n", $exception->getMessage());
         }
+    }
+
+    private static function extractContent($jsFileContent)
+    {
+        $position = mb_strpos($jsFileContent, 'module.exports = ');
+        $position = $position + 17;
+        $json = mb_substr($jsFileContent, $position);
+        $json = rtrim(trim($json), ';');
+
+        return json_decode($json, true);
+    }
+
+    private static function buildEslintJsFile(array $content)
+    {
+        return sprintf('module.exports = %s;', str_replace('\/', '/', json_encode($content)));
+    }
+
+    private static function isAssociativeArray(array $array)
+    {
+        return [] !== $array && array_keys($array) !== range(0, count($array) - 1);
     }
 
     private static function location($parameters)

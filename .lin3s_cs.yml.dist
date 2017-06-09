@@ -45,20 +45,6 @@ parameters:
     eslint_file_location: vendor/lin3s/cs/src/LIN3S/CS/
     eslint_exclude: []
     eslint_rules:               # available rules can view in http://eslint.org/docs/rules/
-        ecmaFeatures:
-            modules: true
-        env:
-            es6: true
-            browser: true
-            jquery: true
-        parserOptions:
-            sourceType: module
         globals:
-            dataLayer: true
-            FastClick: true
-            FB: true
-            google: true
-            Modernizr: true
-            svg4everybody: true
-            BenGorCookies: true
-        rules: []
+            "Modernizr": true
+            "svg4everybody": true
