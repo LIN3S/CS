@@ -10,5 +10,5 @@
 /.php_cs.cache
 /composer.lock
 /src/LIN3S/CS/.eslintrc.js
-/src/LIN3S/CS/.scss-lint.yml
+/src/LIN3S/CS/.stylelintrc.js
 /vendor

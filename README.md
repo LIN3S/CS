@@ -17,7 +17,7 @@ standards. This library is focused to PHP, Javascript and Sass projects.
 * Checks if [Composer][3] json has changes, the lock must be committed too.
 * Fixes the PHP code with fully customizable [PHP-CS-Fixer][8].
 * Checks mess detections with [PHPMD][10].
-* Checks the Sass best practices with [Scss-lint][5].
+* Checks the Sass best practices with [Stylelint][5].
 * Checks the code quality of Javascript files with [ESLint][7].
 
 > This library is very focused to use as pre-commit hook so, this is the reason of [Git][11] PHP class exists. The
@@ -30,9 +30,8 @@ checking, they fix PHP files so, the command affects to all the files that accom
 following requirements:
 
 1. [Composer][3]: `curl -sS https://getcomposer.org/installer | php`
-2. [Ruby][4]
-  * [Scss-lint][5]: `gem install scss_lint`
-3. [Node.js][6]
+2. [Node.js][6]
+  * [Stylelint][5]: `npm install -g stylelint`
   * [Eslint][7]: `npm install -g eslint eslint-plugin-class-property eslint-plugin-react babel-eslint`
 
 
@@ -123,8 +122,7 @@ parameters:
 [1]: http://lin3s.com
 [2]: http://php.net/
 [3]: https://getcomposer.org/
-[4]: https://www.ruby-lang.org/en/downloads/
-[5]: https://github.com/brigade/scss-lint
+[5]: https://stylelint.io/
 [6]: https://nodejs.org/download/
 [7]: http://eslint.org/
 [8]: http://cs.sensiolabs.org/

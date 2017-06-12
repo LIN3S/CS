@@ -16,7 +16,7 @@ namespace LIN3S\CS\Composer;
 use LIN3S\CS\Application;
 use LIN3S\CS\Checker\EsLint;
 use LIN3S\CS\Checker\PhpCsFixer;
-use LIN3S\CS\Checker\ScssLint;
+use LIN3S\CS\Checker\Stylelint;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
@@ -57,7 +57,7 @@ final class Hooks
     public static function addFiles()
     {
         $app = new Application();
-        ScssLint::file($app->parameters());
+        Stylelint::file($app->parameters());
         EsLint::file($app->parameters());
         PhpCsFixer::file($app->parameters());
 
