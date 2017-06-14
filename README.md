@@ -21,9 +21,7 @@ standards. This library is focused to PHP, Javascript and Sass projects.
 * Checks the code quality of Javascript files with [ESLint][7].
 
 > This library is very focused to use as pre-commit hook so, this is the reason of [Git][11] PHP class exists. The
-checkers only check the files that they are going to commit, except PHP-CS-Fixer and PHP-Formatter. Apart of the
-checking, they fix PHP files so, the command affects to all the files that accomplish the requirements.
-
+checkers only validate the files that they are going to commit.
 
 ## Prerequisites
 [LIN3S][1]'s CS is a PHP console application so, it requires [PHP][2] itself. Apart of it, this library has the
