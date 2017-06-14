@@ -32,5 +32,10 @@
         "psr-4": {
             "LIN3S\\CS\\": "src/LIN3S/CS/"
         }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.7.x-dev"
+        }
     }
 }

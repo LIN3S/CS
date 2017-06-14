@@ -30,29 +30,24 @@ use Symfony\Component\Yaml\Yaml;
  */
 final class Application extends BaseApplication
 {
-    private $input;
+    private const APP_NAME = 'LIN3S CS';
+    private const APP_VERSION = '0.7.x-dev';
+
     private $name;
     private $output;
     private $parameters;
 
-    public function __construct($name = null, $version = null, $rootDirectory = null)
+    public function __construct()
     {
-        if (null === $this->name = $name) {
-            $this->name = 'LIN3S CS';
-        }
-        if (null === $version) {
-            $version = '0.0.1';
-        }
-        parent::__construct($name, $version);
+        parent::__construct(self::APP_NAME, self::APP_VERSION);
 
-        $rootDirectory = $rootDirectory ?: realpath(__DIR__ . '/../../../../../../');
+        $rootDirectory = realpath(__DIR__ . '/../../../../../../');
         $this->parameters = Yaml::parse(file_get_contents($rootDirectory . '/.lin3s_cs.yml'))['parameters'];
         $this->parameters['root_directory'] = $rootDirectory;
     }
 
     public function doRun(InputInterface $input, OutputInterface $output)
     {
-        $this->input = $input;
         $this->output = $output;
 
         $output->writeln(sprintf('<fg=white;options=bold;bg=red>%s</fg=white;options=bold;bg=red>', $this->name));
@@ -80,9 +75,9 @@ final class Application extends BaseApplication
 
         if (in_array('stylelint', $this->parameters['enabled'], true)) {
             $output->writeln('<info>Checking scss files with Stylelint</info>');
-            $scssLintResult = Stylelint::check($files, $this->parameters);
-            if (count($scssLintResult) > 0) {
-                foreach ($scssLintResult as $error) {
+            $stylelintResult = Stylelint::check($files, $this->parameters);
+            if (count($stylelintResult) > 0) {
+                foreach ($stylelintResult as $error) {
                     $output->writeln($error->output());
                 }
                 throw new CheckFailException('stylelint');
