@@ -28,15 +28,15 @@ module.exports = {
     "target": true
   },
   "parserOptions": {
-    "sourceType": "module"
+    "sourceType": "module",
     "ecmaVersion": 7,
-      "ecmaFeatures": {
-        "classes": true,
-        "experimentalObjectRestSpread": true,
-        "jsx": true,
-        "modules": true,
-        "templateStrings": true
-      },
+    "ecmaFeatures": {
+      "classes": true,
+      "experimentalObjectRestSpread": true,
+      "jsx": true,
+      "modules": true,
+      "templateStrings": true
+    },
   },
   "plugins": [],
   "rules": {
