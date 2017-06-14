@@ -6,6 +6,7 @@ To get the diff for a specific change, go to https://github.com/LIN3S/CS/commit/
 To get the diff between two versions, go to https://github.com/LIN3S/CS/compare/v0.5.0...v0.6.0
 
 * 0.6.2
+    * Fixed rule about "selector-pseudo-element-colon-notation". Now psudo elements must be with double colon.
     * Improved Readme's prerequisites section.
     * Fixed bug related with the ESLint v4.0 configuration file.
 * 0.6.1
