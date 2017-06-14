@@ -34,7 +34,6 @@ final class Application extends BaseApplication
     private const APP_VERSION = '0.7.x-dev';
 
     private $name;
-    private $output;
     private $parameters;
 
     public function __construct()
@@ -48,8 +47,6 @@ final class Application extends BaseApplication
 
     public function doRun(InputInterface $input, OutputInterface $output)
     {
-        $this->output = $output;
-
         $output->writeln(sprintf('<fg=white;options=bold;bg=red>%s</fg=white;options=bold;bg=red>', $this->name));
         $output->writeln('<info>Fetching files...</info>');
         $files = Git::committedFiles();
