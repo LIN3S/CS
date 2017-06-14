@@ -29,11 +29,20 @@ checking, they fix PHP files so, the command affects to all the files that accom
 [LIN3S][1]'s CS is a PHP console application so, it requires [PHP][2] itself. Apart of it, this library has the
 following requirements:
 
-1. [Composer][3]: `curl -sS https://getcomposer.org/installer | php`
+1. [Composer][3]
+```bash
+$ curl -sS https://getcomposer.org/installer | php
+```
 2. [Node.js][6]
-  * [Stylelint][5]: `npm install -g stylelint`
-  * [Eslint][7]: `npm install -g eslint eslint-plugin-class-property eslint-plugin-react babel-eslint`
-
+ * [Stylelint][5]
+ * [Eslint][7]
+```bash
+$ npm install -g stylelint
+```
+```bash
+$ npm install -g eslint     # >= v4.0.0
+$ npm install -g eslint-plugin-class-property eslint-plugin-react eslint-plugin-babel babel-eslint
+```
 
 ## Getting started
 The recommended and the most suitable way to install is through [Composer][3]. Be sure that the tool is installed in

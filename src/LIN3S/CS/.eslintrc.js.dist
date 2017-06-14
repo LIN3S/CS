@@ -17,14 +17,6 @@ module.exports = {
     "jest": true,
     "jquery": true
   },
-  "ecmaVersion": 7,
-  "ecmaFeatures": {
-    "classes": true,
-    "experimentalObjectRestSpread": true,
-    "jsx": true,
-    "modules": true,
-    "templateStrings": true
-  },
   "globals": {
     "__DEV__": true,
     "dataLayer": true,
@@ -37,6 +29,14 @@ module.exports = {
   },
   "parserOptions": {
     "sourceType": "module"
+    "ecmaVersion": 7,
+      "ecmaFeatures": {
+        "classes": true,
+        "experimentalObjectRestSpread": true,
+        "jsx": true,
+        "modules": true,
+        "templateStrings": true
+      },
   },
   "plugins": [],
   "rules": {
