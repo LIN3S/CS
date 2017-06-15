@@ -6,6 +6,7 @@ To get the diff for a specific change, go to https://github.com/LIN3S/CS/commit/
 To get the diff between two versions, go to https://github.com/LIN3S/CS/compare/v0.5.0...v0.6.0
 
 * 0.7.0
+    * Added installation steps when the ESLint or Stylelint are not installed in the machine.
     * Added JsonParserErrorException to make more human readable the `.eslintrc.js` and `.stylelintrc.js` parser errors.
     * [BC break] Removed output params and made more strict CS Application.
 * 0.6.4

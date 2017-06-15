@@ -77,7 +77,7 @@ final class Application extends BaseApplication
                 foreach ($stylelintResult as $error) {
                     $output->writeln($error->output());
                 }
-                throw new CheckFailException('stylelint');
+                throw new CheckFailException('Stylelint', 'Please, execute "npm update -g stylelint');
             }
         }
 
@@ -88,7 +88,11 @@ final class Application extends BaseApplication
                 foreach ($esLintResult as $error) {
                     $output->writeln($error->output());
                 }
-                throw new CheckFailException('ESLint');
+                throw new CheckFailException(
+                    'ESLint',
+                    'Please, execute "npm update -g eslint eslint-plugin-class-property ' .
+                    'eslint-plugin-react eslint-plugin-babel babel-eslint"'
+                );
             }
         }
 
