@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace spec\LIN3S\CS\Exception;
 
+use LIN3S\CS\Exception\ToolUnavailableException;
 use PhpSpec\ObjectBehavior;
 
 /**
@@ -22,18 +23,13 @@ use PhpSpec\ObjectBehavior;
  */
 class ToolUnavailableExceptionSpec extends ObjectBehavior
 {
-    function let()
+    function it_can_be_thrown()
     {
         $this->beConstructedWith('Dummy-Tool-Name');
-    }
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType('LIN3S\CS\Exception\ToolUnavailableException');
-    }
+        $this->shouldHaveType(ToolUnavailableException::class);
+        $this->shouldHaveType(\Exception::class);
 
-    function it_should_be_extends_exception()
-    {
-        $this->shouldHaveType('Exception');
+        $this->getMessage()->shouldReturn('Dummy-Tool-Name is unavailable so, you have to consider to install it');
     }
 }

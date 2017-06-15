@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace LIN3S\CS\Checker;
 
 use LIN3S\CS\Error\Error;
+use LIN3S\CS\Exception\JsonParserErrorException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 
@@ -60,7 +61,7 @@ final class EsLint implements Checker
         return $errors;
     }
 
-    public static function file($parameters)
+    public static function file($parameters) : void
     {
         $jsContent = file_get_contents(__DIR__ . '/../.eslintrc.js.dist');
 
@@ -98,17 +99,22 @@ final class EsLint implements Checker
         }
     }
 
-    private static function extractContent($jsFileContent)
+    private static function extractContent($jsFileContent) : array
     {
         $position = mb_strpos($jsFileContent, 'module.exports = ');
         $position = $position + 17;
         $json = mb_substr($jsFileContent, $position);
         $json = rtrim(trim($json), ';');
 
-        return json_decode($json, true);
+        $result = json_decode($json, true);
+        if (null === $result) {
+            throw new JsonParserErrorException();
+        }
+
+        return $result;
     }
 
-    private static function buildEslintJsFile(array $content)
+    private static function buildEslintJsFile(array $content) : string
     {
         return sprintf('module.exports = %s;', str_replace('\/', '/', json_encode($content)));
     }
@@ -118,7 +124,7 @@ final class EsLint implements Checker
         return [] !== $array && array_keys($array) !== range(0, count($array) - 1);
     }
 
-    private static function location($parameters)
+    private static function location($parameters) : string
     {
         return $parameters['root_directory'] . '/' . $parameters['eslint_file_location'];
     }
