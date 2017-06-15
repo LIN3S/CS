@@ -13,7 +13,7 @@ To get the diff between two versions, go to https://github.com/LIN3S/CS/compare/
 * 0.6.3
     * Fixed `.eslintrc.js` bug related with the invalid json format.
 * 0.6.2
-    * Fixed rule about "selector-pseudo-element-colon-notation". Now psudo elements must be with double colon.
+    * Fixed rule about "selector-pseudo-element-colon-notation". Now pseudo elements must be with double colon.
     * Improved Readme's prerequisites section.
     * Fixed bug related with the ESLint v4.0 configuration file.
 * 0.6.1
