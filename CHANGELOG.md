@@ -7,6 +7,8 @@ To get the diff between two versions, go to https://github.com/LIN3S/CS/compare/
 
 * 0.7.0
     * [BC break] Removed output params and made more strict CS Application.
+* 0.6.4
+    * Fixed `.eslintrc.js` bug related with the invalid json format.
 * 0.6.3
     * Fixed `.eslintrc.js` bug related with the invalid json format.
 * 0.6.2
