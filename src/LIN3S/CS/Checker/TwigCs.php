@@ -31,7 +31,7 @@ final class TwigCs implements Checker
                 continue;
             }
 
-            $processBuilder = new ProcessBuilder(['php', 'vendor/allocine/twigcs/bin/twigcs lint', $file]);
+            $processBuilder = new ProcessBuilder(['php', 'vendor/allocine/twigcs/bin/twigcs', 'lint', $file]);
             $processBuilder->setWorkingDirectory($parameters['root_directory']);
             $process = $processBuilder->getProcess();
             $process->run();

@@ -62,7 +62,13 @@ final class Application extends BaseApplication
 
         if (in_array('twigcs', $this->parameters['enabled'], true)) {
             $output->writeln('<info>Linting the Twig files with TwigCS</info>');
-            TwigCs::check($files, $this->parameters);
+            $twigCsResult = TwigCs::check($files, $this->parameters);
+            if (count($twigCsResult) > 0) {
+                foreach ($twigCsResult as $error) {
+                    $output->writeln($error->output());
+                }
+                throw new CheckFailException('TwigCS');
+            }
         }
 
         if (in_array('phpmd', $this->parameters['enabled'], true)) {
