@@ -16,6 +16,7 @@ standards. This library is focused to PHP, Javascript and Sass projects.
 
 * Checks if [Composer][3] json has changes, the lock must be committed too.
 * Fixes the PHP code with fully customizable [PHP-CS-Fixer][8].
+* Lints the Twig files with [TwigCS][12].
 * Checks mess detections with [PHPMD][10].
 * Checks the Sass best practices with [Stylelint][5].
 * Checks the code quality of Javascript files with [ESLint][7].
@@ -135,3 +136,4 @@ parameters:
 [8]: http://cs.sensiolabs.org/
 [10]: http://phpmd.org/
 [11]: https://github.com/LIN3S/CS/blob/master/src/Git/Git.php
+[12]: https://github.com/allocine/twigcs
