@@ -18,6 +18,7 @@ use LIN3S\CS\Checker\EsLint;
 use LIN3S\CS\Checker\PhpCsFixer;
 use LIN3S\CS\Checker\Phpmd;
 use LIN3S\CS\Checker\Stylelint;
+use LIN3S\CS\Checker\TwigCs;
 use LIN3S\CS\Exception\CheckFailException;
 use LIN3S\CS\Git\Git;
 use Symfony\Component\Console\Application as BaseApplication;
@@ -57,6 +58,11 @@ final class Application extends BaseApplication
         if (in_array('phpcsfixer', $this->parameters['enabled'], true)) {
             $output->writeln('<info>Fixing PHP code style with PHP-CS-Fixer</info>');
             PhpCsFixer::check($files, $this->parameters);
+        }
+
+        if (in_array('twigcs', $this->parameters['enabled'], true)) {
+            $output->writeln('<info>Linting the Twig files with TwigCS</info>');
+            TwigCs::check($files, $this->parameters);
         }
 
         if (in_array('phpmd', $this->parameters['enabled'], true)) {

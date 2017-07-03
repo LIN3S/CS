@@ -17,7 +17,8 @@
         "neronmoon/scriptsdev": "^0.1.0",
         "phpmd/phpmd": "^2.6",
         "symfony/filesystem": "^2.8 || ^3.0",
-        "symfony/yaml": "^2.8 || ^3.0"
+        "symfony/yaml": "^2.8 || ^3.0",
+        "allocine/twigcs": "^2.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^3.4"

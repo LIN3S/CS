@@ -10,6 +10,7 @@
 parameters:
     enabled:
         - phpmd
+        - twigcs
         - phpcsfixer
         - stylelint
         - eslint
@@ -27,6 +28,8 @@ parameters:
         - unusedcode
         - codesize
         - naming
+
+    twigcs_path: src
 
     phpcsfixer_path: src
     phpcsfixer_test_path: tests
