@@ -77,7 +77,8 @@ Then you have to update the `composer.json` with the following code:
 
 > REMEMBER: The `.lin3s_cs.yml` file is generated dynamically with Composer. The best practices recommend that only
 track the `.dist` file ignoring the `.lin3s_cs.yml` inside `.gitignore`. In the same way, we recommend that, also,
-dynamically generated `.scss-lint.yml`, `.eslint.yml` and `.editorconfig` files, it should be ignored.
+dynamically generated `.phpspec_cs`, `.php_cs`, `.stylelintrc.js`, `.eslintrc.js` and `.editorconfig` files, it should
+be ignored.
 
 ## Use ESLint in a React.js environment
 In LIN3S are building a lot of projects with React.js so, keeping in mind the simplicity of the configuration process
