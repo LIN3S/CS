@@ -26,11 +26,11 @@ final class Composer implements Checker
         $composerLockDetected = false;
 
         foreach ($files as $file) {
-            if ($file === 'composer.json') {
+            if ('composer.json' === $file) {
                 $composerJsonDetected = true;
             }
 
-            if ($file === 'composer.lock') {
+            if ('composer.lock' === $file) {
                 $composerLockDetected = true;
             }
         }

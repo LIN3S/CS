@@ -30,7 +30,7 @@ final class PhpCsFixer implements Checker
                 continue;
             }
 
-            if (mb_strpos($file, 'Spec') !== false) {
+            if (false !== mb_strpos($file, 'Spec')) {
                 self::execute($file, $parameters, '.phpspec_cs');
                 continue;
             }
