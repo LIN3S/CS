@@ -12,16 +12,18 @@
     ],
     "require": {
         "php": "^7.1",
-        "allocine/twigcs": "^2.1",
         "incenteev/composer-parameter-handler": "^2.1",
         "lin3s/php-cs-fixer-config": "^1.0.1",
         "neronmoon/scriptsdev": "^0.1.1",
         "phpmd/phpmd": "^2.6",
-        "symfony/filesystem": "^2.8 || ^3.0",
-        "symfony/yaml": "^2.8 || ^3.0"
+        "symfony/filesystem": "^2.8 || ^3.0 || ^4.0",
+        "symfony/yaml": "^2.8 || ^3.0 || ^4.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^3.4"
+    },
+    "suggest": {
+        "allocine/twigcs": "Library that offers the Twig coding standards"
     },
     "scripts": {
         "cs": [
