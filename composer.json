@@ -1,7 +1,7 @@
 {
     "name": "lin3s/cs",
-    "description": "The coding standards in the LIN3S way",
     "type": "library",
+    "description": "The coding standards in the LIN3S way",
     "license": "MIT",
     "authors": [
         {
@@ -12,7 +12,7 @@
     ],
     "require": {
         "php": "^7.1",
-        "incenteev/composer-parameter-handler": "^2.1",
+        "derrabus/composer-parameter-handler": "^2.1",
         "lin3s/php-cs-fixer-config": "^1.0.1",
         "neronmoon/scriptsdev": "0.1.1",
         "phpmd/phpmd": "^2.6",
@@ -25,22 +25,23 @@
     "suggest": {
         "allocine/twigcs": "Library that offers the Twig coding standards"
     },
-    "scripts": {
-        "cs": [
-            "php-cs-fixer fix --config=.php_cs -v",
-            "php-cs-fixer fix --config=.phpspec_cs -v"
-        ]
-    },
-    "autoload": {
-        "psr-4": {
-            "LIN3S\\CS\\": "src/LIN3S/CS/"
-        }
+    "config": {
+        "sort-packages": true
     },
     "extra": {
         "branch-alias": {
             "dev-master": "0.7.x-dev"
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    "autoload": {
+        "psr-4": {
+            "LIN3S\\CS\\": "src/LIN3S/CS/"
+        }
+    },
+    "scripts": {
+        "cs": [
+            "php-cs-fixer fix --config=.php_cs -v",
+            "php-cs-fixer fix --config=.phpspec_cs -v"
+        ]
+    }
 }
