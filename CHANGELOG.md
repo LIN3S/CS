@@ -5,6 +5,8 @@ This changelog references the relevant changes done between versions.
 To get the diff for a specific change, go to https://github.com/LIN3S/CS/commit/XXX where XXX is the change hash 
 To get the diff between two versions, go to https://github.com/LIN3S/CS/compare/v0.6.0...v0.7.0
 
+* 0.7.4
+    * Fixed bug with `.eslintrc.js` and `.stylelintrc.js` files when there are disabled in the `parameters.yml`.
 * 0.7.3
     * Made library compatible with Symfony 4.
 * 0.7.2

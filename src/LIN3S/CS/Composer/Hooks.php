@@ -24,7 +24,7 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 final class Hooks
 {
-    public static function addHooks()
+    public static function addHooks() : void
     {
         $hooksDirectory = self::rootDir() . '/.git/hooks';
         $fileSystem = new Filesystem();
@@ -39,7 +39,7 @@ final class Hooks
         }
     }
 
-    public static function buildDistFile()
+    public static function buildDistFile() : void
     {
         $distFile = self::rootDir() . '/.lin3s_cs.yml.dist';
         $fileSystem = new Filesystem();
@@ -54,12 +54,14 @@ final class Hooks
         }
     }
 
-    public static function addFiles()
+    public static function addFiles() : void
     {
         $app = new Application();
-        Stylelint::file($app->parameters());
-        EsLint::file($app->parameters());
-        PhpCsFixer::file($app->parameters());
+        $enabled = $app->parameters()['enabled'] ?? [];
+
+        !in_array('stylelint', $enabled, true) ?: Stylelint::file($app->parameters());
+        !in_array('eslint', $enabled, true) ?: EsLint::file($app->parameters());
+        !in_array('phpcsfixer', $enabled, true) ?: PhpCsFixer::file($app->parameters());
 
         $editorConfig = self::rootDir() . '/.editorconfig';
         $fileSystem = new Filesystem();
@@ -72,12 +74,12 @@ final class Hooks
         }
     }
 
-    private static function rootDir()
+    private static function rootDir() : string
     {
         return __DIR__ . '/../../../../../../..';
     }
 
-    private static function lin3sCsRootDir()
+    private static function lin3sCsRootDir() : string
     {
         return __DIR__ . '/../..';
     }
