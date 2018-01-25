@@ -12,6 +12,7 @@
     ],
     "require": {
         "php": "^7.1",
+        "allocine/twigcs": "^3.0",
         "derrabus/composer-parameter-handler": "^2.1",
         "lin3s/php-cs-fixer-config": "^1.0.1",
         "neronmoon/scriptsdev": "0.1.1",
@@ -21,9 +22,6 @@
     },
     "require-dev": {
         "phpspec/phpspec": "^4.3"
-    },
-    "suggest": {
-        "allocine/twigcs": "Library that offers the Twig coding standards"
     },
     "config": {
         "sort-packages": true
