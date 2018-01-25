@@ -48,7 +48,7 @@ final class PhpCsFixer implements Checker
     private static function execute($file, array $parameters, $checkFile = '.php_cs')
     {
         // Exec PHP function is used because php-cs-fixer uses Symfony Process component inside
-        // ProcessBuilder fails when is launched from another ProcessBuilder
+        // Process fails when is launched from another Process
         $commandLine = [
             'php',
             'vendor/friendsofphp/php-cs-fixer/php-cs-fixer',

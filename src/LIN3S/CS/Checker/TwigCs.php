@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace LIN3S\CS\Checker;
 
 use LIN3S\CS\Error\Error;
-use Symfony\Component\Process\ProcessBuilder;
+use Symfony\Component\Process\Process;
 
 /**
  * @author Beñat Espiña <benatespina@gmail.com>
@@ -31,9 +31,8 @@ final class TwigCs implements Checker
                 continue;
             }
 
-            $processBuilder = new ProcessBuilder(['php', 'vendor/allocine/twigcs/bin/twigcs', 'lint', $file]);
-            $processBuilder->setWorkingDirectory($parameters['root_directory']);
-            $process = $processBuilder->getProcess();
+            $process = new Process('vendor/allocine/twigcs/bin/twigcs lint ' . $file);
+            $process->setWorkingDirectory($parameters['root_directory']);
             $process->run();
 
             if (!$process->isSuccessful()) {
