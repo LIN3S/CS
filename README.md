@@ -75,12 +75,67 @@ Then you have to update the `composer.json` with the following code:
 }
 ```
 
-> REMEMBER: The `.lin3s_cs.yml` file is generated dynamically with Composer. The best practices recommend that only
-track the `.dist` file ignoring the `.lin3s_cs.yml` inside `.gitignore`. In the same way, we recommend that, also,
-dynamically generated `.phpspec_cs`, `.php_cs`, `.stylelintrc.js`, `.eslintrc.js` and `.editorconfig` files, it should
-be ignored.
+> Make sure you are not using `branch-alias` directive in composer, it may cause issues
+
+Add the following YAML to the project root:
+
+```yaml
+parameters:
+    enabled:
+        - phpmd
+        - twigcs
+        - phpcsfixer
+        - stylelint
+        - eslint
+
+    name: CHANGE-FOR-YOUR-AWESOME-NAME
+    type: project
+    year: 2018 # Start year only, "-present" will be appended
+    author: LIN3S
+    email: info@lin3s.com
+    version: 0.1
+
+    # All paths below are relative to project root directory where lin3s_cs.yml should be located
+    phpmd_path: src 
+    phpmd_rules:
+        - controversial
+        - unusedcode
+        - codesize
+        - naming
+
+    twigcs_path: src
+
+    phpcsfixer_path: src
+    phpcsfixer_test_path: tests
+    phpcsfixer_file_location: '' # Use it carefully, check https://github.com/LIN3S/CS/issues/6
+
+    stylelint_path: app/Resources/assets/scss
+    stylelint_file_location: '' # Use it carefully, check https://github.com/LIN3S/CS/issues/6
+    stylelint_exclude: []       # Check full list: https://stylelint.io/user-guide/rules/
+    stylelint_rules: []         # Check full list: https://stylelint.io/user-guide/rules/
+
+    eslint_path: app/Resources/assets/js
+    eslint_file_location: ''    # Use it carefully, check https://github.com/LIN3S/CS/issues/6
+    eslint_exclude: []          # Check full list: https://stylelint.io/user-guide/rules/
+    eslint_rules:               # Check full list: http://eslint.org/docs/rules/
+        globals:
+            "Modernizr": true
+            "svg4everybody": true
+```
+
+Ignore generated files adding the following lines to `.gitignore`:
+
+```
+.phpspec_cs
+.php_cs
+.stylelintrc.js
+.eslintrc.js
+.editorconfig
+.lin3s_cs.yml
+```
 
 ## Use ESLint in a React.js environment
+
 In LIN3S are building a lot of projects with React.js so, keeping in mind the simplicity of the configuration process
 the following lin3s are our requirements to standardize the JS code inside this environment.
 
