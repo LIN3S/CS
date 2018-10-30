@@ -91,12 +91,12 @@ final class PhpCsFixer implements Checker
         );
         $file = str_replace(
             '$$CHANGE-FOR-PHPCSFIXER-PATH$$',
-            '/' . $parameters['phpcsfixer_path'],
+            $parameters['root_directory'] . '/' . $parameters['phpcsfixer_path'],
             $file
         );
         $file = str_replace(
             '$$CHANGE-FOR-PHPCSFIXER-TEST-PATH$$',
-            '/' . $parameters['phpcsfixer_test_path'],
+            $parameters['root_directory'] . '/' . $parameters['phpcsfixer_test_path'],
             $file
         );
 
