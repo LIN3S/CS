@@ -5,6 +5,8 @@ This changelog references the relevant changes done between versions.
 To get the diff for a specific change, go to https://github.com/LIN3S/CS/commit/XXX where XXX is the change hash 
 To get the diff between two versions, go to https://github.com/LIN3S/CS/compare/v0.6.0...v0.7.0
 
+* 0.7.5
+    * Fixed issues running PHPCsFixer due to invalid path. No he path is relative to root directory (lin3s_cs.yml location) 
 * 0.7.4
     * Restored the `allocine/twigcs` as required dependency.
     * Made library compatible with the last requirements around **Symfony Process**.
